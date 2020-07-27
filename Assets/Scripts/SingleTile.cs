@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Assets/FloorTile")]
-public class FloorTile : TileBase
+[CreateAssetMenu(menuName="Assets/SingleTile")]
+public class SingleTile : TileBase
 {
     public Sprite sprite;
 

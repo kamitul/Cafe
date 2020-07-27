@@ -264,7 +264,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 85
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -289,8 +289,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331683440}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.97, y: 6.37, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -331,6 +331,9 @@ MonoBehaviour:
   go:
   - {fileID: 11400000, guid: b69e7ee376138b04e8cc2e3a9ccfe5fa, type: 2}
   - {fileID: 11400000, guid: 992b0e99e7b01bc4a83b7e56d3326a2d, type: 2}
+  - {fileID: 11400000, guid: aaa4e3926a1ff574489b1e5c6d4f8594, type: 2}
+  - {fileID: 11400000, guid: 7dc98c516cd92cb49b93a13b41141659, type: 2}
+  - {fileID: 11400000, guid: 09af5ec2e13f08b4cb9f950528c38003, type: 2}
 --- !u!4 &344839902
 Transform:
   m_ObjectHideFlags: 0
@@ -370,7 +373,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083063827}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
+  m_CellSize: {x: 1.28, y: 1.28, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0

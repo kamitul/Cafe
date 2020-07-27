@@ -5,7 +5,6 @@ using UnityEngine;
 public interface IBuilder
 {
     void BuildBackground();
-
     void BuildMisc();
     MapMatrix GetProduct();
 }

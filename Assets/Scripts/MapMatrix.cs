@@ -6,12 +6,17 @@ using UnityEngine;
 public class BoxTile
 {
     public Vector3Int Position;
-    public int Id;
+    public List<int> Id = new List<int>();
 
     public BoxTile(Vector3Int pos, int id)
     {
         Position = pos;
-        Id = id;
+        Id.Add(id);
+    }
+
+    public void AddId(int id)
+    {
+        Id.Add(id);
     }
 }
 

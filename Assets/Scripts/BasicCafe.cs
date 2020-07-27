@@ -20,12 +20,86 @@ public class BasicCafe : IBuilder
 
     public void BuildBackground()
     {
+        var engine = new System.Random();
+        int rand = 0;
+
         BoxTile[][] tiles = new BoxTile[width][];
         for (int i = 0; i < tiles.Length; ++i)
         {
             tiles[i] = new BoxTile[height];
         }
 
+        CreateDimensions(tiles);
+        CreateEnviroment(engine, rand, tiles);
+        CreateWindows(tiles);
+        CreateDoor(engine, tiles);
+        CreateFloor(tiles);
+
+        mapMatrix = new MapMatrix(tiles);
+    }
+
+    private void CreateFloor(BoxTile[][] tiles)
+    {
+        for (int i = 1; i < width - 1; ++i)
+        {
+            for (int j = 1; j < height - 1; ++j)
+            {
+                tiles[i][j] = new BoxTile(new Vector3Int(i, j, 0), 1);
+            }
+        }
+    }
+
+    private int CreateDoor(System.Random engine, BoxTile[][] tiles)
+    {
+        int rand = engine.Next(1, height - 1);
+        tiles[0][rand] = new BoxTile(new Vector3Int(0, rand, 0), 3);
+        return rand;
+    }
+
+    private void CreateWindows(BoxTile[][] tiles)
+    {
+        for (int i = 0; i < height; ++i)
+        {
+            if (i % 3 == 0)
+            {
+                tiles[0][i] = new BoxTile(new Vector3Int(0, i, 0), 2);
+                tiles[width - 1][i] = new BoxTile(new Vector3Int(width - 1, i, 0), 2);
+            }
+        }
+
+        for (int i = 0; i < width; ++i)
+        {
+            if (i % 5 == 0)
+            {
+                tiles[i][0] = new BoxTile(new Vector3Int(i, 0, 0), 2);
+                tiles[i][height - 1] = new BoxTile(new Vector3Int(i, height - 1, 0), 2);
+            }
+        }
+    }
+
+    private int CreateEnviroment(System.Random engine, int rand, BoxTile[][] tiles)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            rand = engine.Next(1, width - 1);
+            tiles[rand][0].AddId(4);
+            rand = engine.Next(1, width - 1);
+            tiles[rand][height - 1].AddId(4);
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            rand = engine.Next(1, height - 1);
+            tiles[0][rand].AddId(4);
+            rand = engine.Next(1, height - 1);
+            tiles[width - 1][rand].AddId(4);
+        }
+
+        return rand;
+    }
+
+    private void CreateDimensions(BoxTile[][] tiles)
+    {
         for (int i = 0; i < width; ++i)
         {
             tiles[i][0] = new BoxTile(new Vector3Int(i, 0, 0), 0);
@@ -37,16 +111,6 @@ public class BasicCafe : IBuilder
             tiles[0][i] = new BoxTile(new Vector3Int(0, i, 0), 0);
             tiles[width - 1][i] = new BoxTile(new Vector3Int(width - 1, i, 0), 0);
         }
-
-        for(int i = 1; i < width - 1; ++i)
-        {
-            for(int j = 1; j < height - 1; ++j)
-            {
-                tiles[i][j] = new BoxTile(new Vector3Int(i, j, 0), 1);
-            }
-        }
-
-        mapMatrix = new MapMatrix(tiles);
     }
 
     public void BuildMisc()

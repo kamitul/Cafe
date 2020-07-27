@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 317aa89856e638544b451b8f05220430, type: 3}
-  m_Name: FloorTile
+  m_Name: DoorTile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: b93c67c055bee83469a02c3a9a4d5ce5, type: 3}
+  sprite: {fileID: 21300000, guid: f12fe9a85a58a0849933138a6019eb57, type: 3}

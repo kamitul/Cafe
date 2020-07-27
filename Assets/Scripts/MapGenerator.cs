@@ -22,9 +22,9 @@ public class MapGenerator : MonoBehaviour
 
     private async void Awake()
     {
-        Task thr = new Task(() => BuildMap(CafeType.BASIC));
-        thr.Start();
-        await thr;
+        Task tsk = new Task(() => BuildMap(CafeType.BASIC));
+        tsk.Start();
+        await tsk;
 
         LoadMap();
     }
@@ -36,6 +36,7 @@ public class MapGenerator : MonoBehaviour
             case CafeType.BASIC:
                 builder = new BasicCafe(tilemap, Width, Height);
                 builder.BuildBackground();
+                builder.BuildMisc();
                 MapMatrix = builder.GetProduct();
                 break;
             default:
@@ -50,7 +51,8 @@ public class MapGenerator : MonoBehaviour
             for(int j = 0; j < MapMatrix.BoxTiles[i].Count; ++j)
             {
                 var elem = MapMatrix.BoxTiles[i][j];
-                tilemap.SetTile(elem.Position, go[elem.Id]);
+                for (int z = 0; z < elem.Id.Count; ++z)
+                    tilemap.SetTile(elem.Position + new Vector3Int(0, 0, z * 1), go[elem.Id[z]]);
             }
         }
     }
