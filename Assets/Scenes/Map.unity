@@ -328,12 +328,17 @@ MonoBehaviour:
   tilemap: {fileID: 1166133049}
   Width: 20
   Height: 10
+  MapMatrix:
+    BoxTiles: []
   go:
-  - {fileID: 11400000, guid: b69e7ee376138b04e8cc2e3a9ccfe5fa, type: 2}
+  - {fileID: 11400000, guid: 9749bfea85d27a242aaf382388e6fb30, type: 2}
+  - {fileID: 11400000, guid: 503f8b82b52b54f44af3f2f25a574776, type: 2}
+  - {fileID: 11400000, guid: ebfe4dc780babb3448a6945c9b7a303b, type: 2}
   - {fileID: 11400000, guid: 992b0e99e7b01bc4a83b7e56d3326a2d, type: 2}
   - {fileID: 11400000, guid: aaa4e3926a1ff574489b1e5c6d4f8594, type: 2}
   - {fileID: 11400000, guid: 7dc98c516cd92cb49b93a13b41141659, type: 2}
   - {fileID: 11400000, guid: 09af5ec2e13f08b4cb9f950528c38003, type: 2}
+  - {fileID: 11400000, guid: 8bb7a4a8687b0b3459ec89fb541cce1d, type: 2}
 --- !u!4 &344839902
 Transform:
   m_ObjectHideFlags: 0
@@ -403,6 +408,7 @@ GameObject:
   - component: {fileID: 1166133047}
   - component: {fileID: 1166133049}
   - component: {fileID: 1166133048}
+  - component: {fileID: 1166133050}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -509,3 +515,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1166133050
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166133046}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001

@@ -48,9 +48,9 @@ public class MapGenerator : MonoBehaviour
     {
         for(int i = 0; i< MapMatrix.BoxTiles.Count; ++i)
         {
-            for(int j = 0; j < MapMatrix.BoxTiles[i].Count; ++j)
+            for(int j = 0; j < MapMatrix.BoxTiles[i].RowTiles.Count; ++j)
             {
-                var elem = MapMatrix.BoxTiles[i][j];
+                var elem = MapMatrix.BoxTiles[i].RowTiles[j];
                 for (int z = 0; z < elem.Id.Count; ++z)
                     tilemap.SetTile(elem.Position + new Vector3Int(0, 0, z * 1), go[elem.Id[z]]);
             }

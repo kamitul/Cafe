@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 [System.Serializable]
@@ -21,14 +23,27 @@ public class BoxTile
 }
 
 [System.Serializable]
+public class MapRow
+{
+    public List<BoxTile> RowTiles;
+    public MapRow(List<BoxTile> tiles)
+    {
+        RowTiles = tiles;
+    }
+}
+
+[System.Serializable]
 public class MapMatrix
 {
-    public List<List<BoxTile>> BoxTiles;
+    public List<MapRow> BoxTiles;
 
-
-    public MapMatrix(BoxTile[][] tiles)
+    public MapMatrix()
     {
-        BoxTiles = new List<List<BoxTile>>();
+    } 
+
+    public void SetTiles(BoxTile[][] tiles)
+    {
+        BoxTiles = new List<MapRow>();
 
         for (int i = 0; i < tiles.Length; i++)
         {
@@ -37,7 +52,22 @@ public class MapMatrix
             {
                 temp.Add(tiles[i][j]);
             }
-            BoxTiles.Add(temp);
+            BoxTiles.Add(new MapRow(temp));
         }
+       
+    }
+
+    public Tuple<int,int> GetIndexOf(Vector3Int vector3Int)
+    {
+        for (int i = 0; i < BoxTiles.Count; i++)
+        {
+            for (int j = 0; j < BoxTiles[i].RowTiles.Count; j++)
+            {
+                if (BoxTiles[i].RowTiles[j].Position == vector3Int)
+                    return new Tuple<int, int>(i, j);
+            }
+        }
+
+        return null;
     }
 }

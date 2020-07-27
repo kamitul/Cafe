@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class BasicCafe : IBuilder
 {
@@ -10,12 +12,14 @@ public class BasicCafe : IBuilder
     private int width;
     private int height;
     private MapMatrix mapMatrix;
+    private BoxTile[][] tiles;
 
     public BasicCafe(Tilemap tilemap, int width, int height)
     {
         this.tilemap = tilemap;
         this.width = width;
         this.height = height;
+        this.mapMatrix = new MapMatrix();
     }
 
     public void BuildBackground()
@@ -23,19 +27,19 @@ public class BasicCafe : IBuilder
         var engine = new System.Random();
         int rand = 0;
 
-        BoxTile[][] tiles = new BoxTile[width][];
+        tiles = new BoxTile[width][];
         for (int i = 0; i < tiles.Length; ++i)
         {
             tiles[i] = new BoxTile[height];
         }
 
+        CreateFloor(tiles);
         CreateDimensions(tiles);
         CreateEnviroment(engine, rand, tiles);
         CreateWindows(tiles);
         CreateDoor(engine, tiles);
-        CreateFloor(tiles);
 
-        mapMatrix = new MapMatrix(tiles);
+        mapMatrix.SetTiles(tiles);
     }
 
     private void CreateFloor(BoxTile[][] tiles)
@@ -44,35 +48,26 @@ public class BasicCafe : IBuilder
         {
             for (int j = 1; j < height - 1; ++j)
             {
-                tiles[i][j] = new BoxTile(new Vector3Int(i, j, 0), 1);
+                tiles[i][j] = new BoxTile(new Vector3Int(i, j, 0), 3);
             }
         }
     }
 
     private int CreateDoor(System.Random engine, BoxTile[][] tiles)
     {
-        int rand = engine.Next(1, height - 1);
-        tiles[0][rand] = new BoxTile(new Vector3Int(0, rand, 0), 3);
+        int rand = engine.Next(2, width - 2);
+        tiles[rand][0] = new BoxTile(new Vector3Int(rand, 0, 0), 5);
         return rand;
     }
 
     private void CreateWindows(BoxTile[][] tiles)
     {
-        for (int i = 0; i < height; ++i)
-        {
-            if (i % 3 == 0)
-            {
-                tiles[0][i] = new BoxTile(new Vector3Int(0, i, 0), 2);
-                tiles[width - 1][i] = new BoxTile(new Vector3Int(width - 1, i, 0), 2);
-            }
-        }
-
-        for (int i = 0; i < width; ++i)
+        for (int i = 2; i < width; ++i)
         {
             if (i % 5 == 0)
             {
-                tiles[i][0] = new BoxTile(new Vector3Int(i, 0, 0), 2);
-                tiles[i][height - 1] = new BoxTile(new Vector3Int(i, height - 1, 0), 2);
+                tiles[i][0] = new BoxTile(new Vector3Int(i, 0, 0), 4);
+                tiles[i][height - 1] = new BoxTile(new Vector3Int(i, height - 1, 0), 4);
             }
         }
     }
@@ -81,18 +76,8 @@ public class BasicCafe : IBuilder
     {
         for (int i = 0; i < 2; i++)
         {
-            rand = engine.Next(1, width - 1);
-            tiles[rand][0].AddId(4);
-            rand = engine.Next(1, width - 1);
-            tiles[rand][height - 1].AddId(4);
-        }
-
-        for (int i = 0; i < 2; i++)
-        {
-            rand = engine.Next(1, height - 1);
-            tiles[0][rand].AddId(4);
-            rand = engine.Next(1, height - 1);
-            tiles[width - 1][rand].AddId(4);
+            rand = engine.Next(2, width - 1);
+            tiles[rand][height - 1].AddId(6);
         }
 
         return rand;
@@ -108,14 +93,33 @@ public class BasicCafe : IBuilder
 
         for (int i = 0; i < height; ++i)
         {
-            tiles[0][i] = new BoxTile(new Vector3Int(0, i, 0), 0);
-            tiles[width - 1][i] = new BoxTile(new Vector3Int(width - 1, i, 0), 0);
+            tiles[0][i] = new BoxTile(new Vector3Int(0, i, 0), 1);
+            tiles[width - 1][i] = new BoxTile(new Vector3Int(width - 1, i, 0), 2);
         }
     }
 
     public void BuildMisc()
     {
-        
+        Vector3Int leftTop = new Vector3Int(1, height - 2, 0);
+        Vector3Int rightDown = new Vector3Int(width - 8, 2, 0);
+        Vector3Int rightTop = new Vector3Int(rightDown.x, leftTop.y, 0);
+        Vector3Int leftDown = new Vector3Int(leftTop.x, rightDown.y, 0);
+
+        Vector3Int center = new Vector3Int(rightDown.x + leftTop.x, leftTop.y + rightDown.y, leftTop.z + rightDown.z) / 2;
+
+        Tuple<int, int> indexes = mapMatrix.GetIndexOf((center + leftTop) / 2);
+        tiles[indexes.Item1][indexes.Item2].AddId(7);
+
+        indexes = mapMatrix.GetIndexOf((center + leftDown) / 2);
+        tiles[indexes.Item1][indexes.Item2].AddId(7);
+
+        indexes = mapMatrix.GetIndexOf((center + rightTop) / 2);
+        tiles[indexes.Item1][indexes.Item2].AddId(7);
+
+        indexes = mapMatrix.GetIndexOf((center + rightDown) / 2);
+        tiles[indexes.Item1][indexes.Item2].AddId(7);
+
+        mapMatrix.SetTiles(tiles);
     }
 
     public MapMatrix GetProduct()
