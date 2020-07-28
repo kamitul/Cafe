@@ -435,7 +435,7 @@ MonoBehaviour:
   customers: []
   mapGenerator: {fileID: 344839901}
   customerPrefab: {fileID: 1214040455}
-  SpawnRate: 10
+  SpawnRate: 5
 --- !u!1 &1083063827
 GameObject:
   m_ObjectHideFlags: 0
