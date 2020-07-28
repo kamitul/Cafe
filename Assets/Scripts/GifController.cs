@@ -8,22 +8,42 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class GifController : MonoBehaviour, ITickable
 {
-    [SerializeField]
-    private List<Sprite> sprites;
-
+    public List<SpriteAnimation> Animations;
     public int TickTime = 100;
 
     private SpriteRenderer spriteRenderer;
     private int index = 0;
     private CancellationTokenSource cancelToken;
+    private SpriteAnimation currentAnimation;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         cancelToken = new CancellationTokenSource();
+        Initialize();
     }
 
-    private async void Start()
+    public void Play(string name)
+    {
+        if (!currentAnimation || currentAnimation.name != name)
+        {
+            cancelToken = new CancellationTokenSource();
+            currentAnimation = Animations.Find(x => x.Name == name);
+        }
+    }
+
+    public void Stop()
+    {
+        cancelToken.Cancel();
+        cancelToken.Dispose();      
+    }
+
+    public void Tick()   
+    {
+        
+    }
+
+    private async void Initialize()
     {
         try
         {
@@ -42,18 +62,15 @@ public class GifController : MonoBehaviour, ITickable
             if (cancelToken.IsCancellationRequested)
                 throw new TaskCanceledException();
 
-            spriteRenderer.sprite = sprites[++index%sprites.Count];
+            if(currentAnimation)
+                spriteRenderer.sprite = currentAnimation.Sprites[++index % currentAnimation.Sprites.Count];
+
             await Task.Delay(TickTime);
         }
     }
 
-    public void Tick()   
-    {
-        
-    }
-
     private void OnDestroy()
     {
-        cancelToken.Cancel();
+        Stop();
     }
 }
