@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class CommandInvoker : MonoBehaviour
 {
-    private Queue<ICommand> commandBuffer;
+    private Queue<Command> commandBuffer;
 
     private void Awake()
     {
-        commandBuffer = new Queue<ICommand>();
+        commandBuffer = new Queue<Command>();
     }
 
-    public void AddCommand(ICommand command)
+    public void AddCommand(Command command)
     {
         commandBuffer.Enqueue(command);
     }
@@ -20,8 +22,24 @@ public class CommandInvoker : MonoBehaviour
     {
         while(commandBuffer.Count > 0)
         {
-            ICommand c = commandBuffer.Dequeue();
-            await c.Execute();
+            Command c = commandBuffer.Dequeue();
+            try
+            {
+                await c.Execute();
+                c.Destroy();
+            }
+            catch (TaskCanceledException)
+            {
+                return;
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        for(int i = 0; i< commandBuffer.Count; ++i)
+        {
+            commandBuffer.Dequeue().Destroy();
         }
     }
 }

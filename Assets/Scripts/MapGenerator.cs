@@ -56,4 +56,9 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
+
+    public List<BoxTile> GetTile(int id)
+    {
+        return MapMatrix.GetId(id);
+    }
 }

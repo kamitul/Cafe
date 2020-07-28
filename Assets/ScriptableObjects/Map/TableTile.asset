@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TableTile
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 40b9597142359f742b2e8f5b14261ef2, type: 3}
-  Collideable: 1
+  Collideable: 0

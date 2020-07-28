@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class CustomerMovementController : MonoBehaviour, ITickable
 {
-    [Range(0f,1f)]
-    public float Speed = 0.25f;
+    [Range(1f,4f)]
+    public float Speed = 2f;
     private GifController gifController;
 
     private Vector3 destination;
@@ -23,7 +23,7 @@ public class CustomerMovementController : MonoBehaviour, ITickable
     public void Tick()
     {
         if(isMoving)
-            transform.position = Vector3.Lerp(transform.position, destination, Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destination, Speed * Time.deltaTime);
     }
 
     public float GetDistance()

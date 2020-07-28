@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class SitCommand : ICommand
+public class DelayCommand : Command
 {
     private CustomerMovementController movementController;
     private int delay;
 
-    public SitCommand(CustomerMovementController moveController, int delay)
+    public DelayCommand(CustomerMovementController moveController, int delay)
     {
         this.movementController = moveController;
         this.delay = delay;

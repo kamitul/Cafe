@@ -4,16 +4,24 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
+public enum TileStatus
+{
+    OCCUPIED,
+    AVAILABLE
+}
+
 [System.Serializable]
 public class BoxTile
 {
     public Vector3Int Position;
     public List<int> Id = new List<int>();
+    public TileStatus Status;
 
     public BoxTile(Vector3Int pos, int id)
     {
         Position = pos;
         Id.Add(id);
+        Status = TileStatus.AVAILABLE;
     }
 
     public void AddId(int id)
@@ -69,5 +77,20 @@ public class MapMatrix
         }
 
         return null;
+    }
+
+    public List<BoxTile> GetId(int id)
+    {
+        List<BoxTile> boxTiles = new List<BoxTile>();
+        for (int i = 0; i < BoxTiles.Count; i++)
+        {
+            for (int j = 0; j < BoxTiles[i].RowTiles.Count; j++)
+            {
+                if (BoxTiles[i].RowTiles[j].Id.Contains(id))
+                    boxTiles.Add(BoxTiles[i].RowTiles[j]);
+            }
+        }
+
+        return boxTiles;
     }
 }

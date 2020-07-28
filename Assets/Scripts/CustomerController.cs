@@ -37,12 +37,6 @@ public class CustomerController : MonoBehaviour
     private void Awake()
     {
         tickables = new TickableContainter(GetComponents<ITickable>().ToList());
-
-        //Add commands
-        //GetComponent<CommandInvoker>().AddCommand(new MoveToCommand(tickables.Get<CustomerMovementController>(), new Vector3(18, 5, 0)));
-        //GetComponent<CommandInvoker>().AddCommand(new SitCommand(tickables.Get<CustomerMovementController>(), 3));
-        //GetComponent<CommandInvoker>().AddCommand(new MoveToCommand(tickables.Get<CustomerMovementController>(), new Vector3(4, 5, 0)));
-        //GetComponent<CommandInvoker>().AddCommand(new SitCommand(tickables.Get<CustomerMovementController>(), 5));
     }
 
     private void Start()
