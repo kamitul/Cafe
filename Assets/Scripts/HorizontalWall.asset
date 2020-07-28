@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: HorizontalWall
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 71dfa8e0949135d4bbeffaf09ce37331, type: 3}
+  Collideable: 1

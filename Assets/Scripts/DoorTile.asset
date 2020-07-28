@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: DoorTile
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: f12fe9a85a58a0849933138a6019eb57, type: 3}
+  Collideable: 1

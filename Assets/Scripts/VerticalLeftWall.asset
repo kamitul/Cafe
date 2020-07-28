@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: VerticalLeftWall
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: c3edd27d7fd17d944b1bfe713f91958b, type: 3}
+  Collideable: 1

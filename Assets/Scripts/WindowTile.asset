@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: WindowTile
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 4759efc479aed4047b721907f4d0bcc5, type: 3}
+  Collideable: 1

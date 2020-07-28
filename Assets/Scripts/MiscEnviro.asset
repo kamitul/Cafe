@@ -15,3 +15,4 @@ MonoBehaviour:
   sprite:
   - {fileID: 21300000, guid: c9071fdb783ed52498aadb84435b380b, type: 3}
   - {fileID: 21300000, guid: b83fb09f349749941976b9235f30f368, type: 3}
+  Collideable: 1

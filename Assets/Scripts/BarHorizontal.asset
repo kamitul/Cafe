@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: BarHorizontal
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: f456f68187fae9741aa0020ecd3bdb1d, type: 3}
+  Collideable: 1

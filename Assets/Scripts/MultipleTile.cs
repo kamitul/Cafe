@@ -7,9 +7,13 @@ using UnityEngine.Tilemaps;
 public class MultipleTile : TileBase
 {
     public Sprite[] sprite;
+    public bool Collideable = false;
 
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
         tileData.sprite = sprite[Random.Range(0, sprite.Length - 1)];
+
+        if (Collideable)
+            tileData.colliderType = Tile.ColliderType.Sprite;
     }
 }
