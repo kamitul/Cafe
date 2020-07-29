@@ -14,8 +14,7 @@ public class CoffeeMakingController : MonoBehaviour
     
     [Header("For testing only")]
     public  Coffee orderedCoffee;
-
-
+    
     private void Start()
     {
         int wholeAmountOfIngredients = 0;

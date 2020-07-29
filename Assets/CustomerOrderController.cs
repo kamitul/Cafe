@@ -5,17 +5,19 @@ using UnityEngine;
 
 public class CustomerOrderController : MonoBehaviour
 {
-    object Cafe;
+    [SerializeField] private Coffees coffees;
 
-    public static Action<object> OnOrderMade;
+    private Coffee coffee;
+
+    public static Action<Coffee> OnOrderMade;
 
     public void Randomize()
     {
-        // GetRandomCoffe()
+        coffee = coffees.GetRandomCoffee();    
     }
 
     public void MakeOrder()
     {
-        OnOrderMade.Invoke(Cafe);
+        OnOrderMade.Invoke(coffee);
     }
 }
