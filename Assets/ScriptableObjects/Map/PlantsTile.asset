@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317aa89856e638544b451b8f05220430, type: 3}
-  m_Name: TableTile
+  m_Script: {fileID: 11500000, guid: c1bec2ca2bcd92941ba6e036f3310b2a, type: 3}
+  m_Name: PlantsTile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 40b9597142359f742b2e8f5b14261ef2, type: 3}
-  Collideable: 0
+  sprite:
+  - {fileID: 21300000, guid: 776ad7585fe14184d93900a42f8ac738, type: 3}
+  Collideable: 1

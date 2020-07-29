@@ -55,7 +55,7 @@ public class BasicCafe : IBuilder
 
     private int CreateDoor(System.Random engine)
     {
-        int rand = engine.Next(2, width - 2);
+        int rand = engine.Next(2, width - 7);
         tiles[rand][0] = new BoxTile(new Vector3Int(rand, 0, 0), 5);
         return rand;
     }
@@ -74,11 +74,19 @@ public class BasicCafe : IBuilder
 
     private int CreateEnviroment(System.Random engine, int rand)
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
         {
             rand = engine.Next(2, width - 1);
             tiles[rand][height - 1].AddId(6);
         }
+
+        for (int i = 2; i < width - 1; i += 3)
+        {
+            tiles[i][height - 1].AddId(11);
+        }
+
+        tiles[1][height - 2].AddId(12);
+        tiles[width - 2][height - 2].AddId(12);
 
         return rand;
     }
@@ -148,7 +156,7 @@ public class BasicCafe : IBuilder
 
     private void CreateStools(Vector3Int vector3Int)
     {
-        Tuple<int, int> indexes = mapMatrix.GetIndexOf(vector3Int + new Vector3Int(1,1, 0));
+        Tuple<int, int> indexes = mapMatrix.GetIndexOf(vector3Int + new Vector3Int(1, 1, 0));
         tiles[indexes.Item1][indexes.Item2].AddId(10);
 
         indexes = mapMatrix.GetIndexOf(vector3Int + new Vector3Int(-1, 1, 0));
