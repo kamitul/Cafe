@@ -12,6 +12,7 @@ public class CustomerOrderController : MonoBehaviour
     private Order order = new Order();
     private bool isClicked = false;
     public static Action<Order> OnOrderMade;
+    public Guid CustomerGUID;
 
     private void Awake()
     {
@@ -41,9 +42,9 @@ public class CustomerOrderController : MonoBehaviour
     public void MakeOrder()
     {
         isClicked = true;
-        //placeholder
+        CustomerGUID = Guid.NewGuid();
         order.CustomerName = "Mark";
-        order.OrderIdentfier = Guid.NewGuid();
+        order.OrderIdentfier = CustomerGUID;
         OnOrderMade?.Invoke(order);
     }
 }

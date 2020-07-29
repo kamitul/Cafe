@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class OrderCommand : Command
     private float makeOrderLimitTime;
     private float getOrderLimitTime;
     private float counter;
+
+    private bool coffeMade = false;
 
     public OrderCommand(CustomerOrderController cnt, float makeOrderLimitTime, float getOrderLimitTime)
     {
@@ -40,9 +43,9 @@ public class OrderCommand : Command
             return;
         }
 
-        bool coffeMade = false;
-        //CoffeeMakingController.OnProperCoffePrepared += () => coffeMade = true;
-        //CoffeeMakingController.OnWrongCoffePrepared += () => coffeMade = true;
+        coffeMade = false;
+        CoffeeMakingController.OnProperCoffePrepared += CheckForCoffe;
+        CoffeeMakingController.OnWrongCoffePrepared += CheckForCoffe;
         
         counter = 0f;
 
@@ -53,6 +56,14 @@ public class OrderCommand : Command
                 break;
 
             await Task.Delay(100);
+        }
+    }
+
+    private void CheckForCoffe(Order obj)
+    {
+        if(obj.OrderIdentfier == cnt.CustomerGUID)
+        {
+            coffeMade = true;
         }
     }
 }
