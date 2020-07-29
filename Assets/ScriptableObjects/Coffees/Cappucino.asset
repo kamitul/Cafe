@@ -20,5 +20,4 @@ MonoBehaviour:
     IngredientAmount: 2
   - IngredientType: 3
     IngredientAmount: 2
-  AdditionalIngredient: 0
   Texure: {fileID: 0}

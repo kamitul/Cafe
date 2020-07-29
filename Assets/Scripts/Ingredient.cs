@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Ingredient : MonoBehaviour
 {
-    public IngredientType ingredientType;
-    public Texture2D texture;
+    public IngredientType IngredientType;
+    public Sprite IngredientSprite;
 }

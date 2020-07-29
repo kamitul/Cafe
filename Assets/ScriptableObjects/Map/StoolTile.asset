@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: StoolTile
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 530a76c82a0c2754dbc2a4799052812d, type: 3}
+  Collideable: 0

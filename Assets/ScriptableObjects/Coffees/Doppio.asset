@@ -16,5 +16,4 @@ MonoBehaviour:
   IngredientsToMakeCoffee:
   - IngredientType: 1
     IngredientAmount: 2
-  AdditionalIngredient: 0
   Texure: {fileID: 0}

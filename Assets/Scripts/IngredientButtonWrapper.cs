@@ -5,12 +5,11 @@ using UnityEngine;
 public class IngredientButtonWrapper : MonoBehaviour
 {
     [SerializeField]
-    private CoffeeMaker coffeeMaker;
+    private CoffeeMakingController coffeeMaker;
     [SerializeField]
-    private IngredientType ingredientType;
+    private Ingredient ingredient;
     public void InvokeEvent()
     {
-        Debug.LogError("xd", this);
-        coffeeMaker.AddIngredient(ingredientType);
+        coffeeMaker.AddIngredient(ingredient);
     }
 }
