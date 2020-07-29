@@ -17,6 +17,8 @@ public class CustomerSpawner : MonoBehaviour
 
     public float SpawnRate = 7f;
     public int MaxCustomers = 7;
+    public float MaxOrderMakeTime = 3f;
+    public float MaxOrderGetTime = 6f;
 
     private float timer = 0f;
 
@@ -58,8 +60,7 @@ public class CustomerSpawner : MonoBehaviour
         invoker.AddCommand(new MoveToCommand(go.GetComponent<CustomerMovementController>(), door, destStool, new Vector3(1.28f / 2, 1.28f, 0)));
         invoker.AddCommand(new DelayCommand(go.GetComponent<CustomerMovementController>(), UnityEngine.Random.Range(3,10)));
         invoker.AddCommand(new MoveToCommand(go.GetComponent<CustomerMovementController>(), destStool, destBar, new Vector3(-1.28f / 2, 2.28f, 0)));
-        invoker.AddCommand(new OrderCommand());
-        invoker.AddCommand(new DelayCommand(go.GetComponent<CustomerMovementController>(), UnityEngine.Random.Range(10, 20)));
+        invoker.AddCommand(new OrderCommand(go.GetComponent<CustomerOrderController>(), MaxOrderMakeTime, MaxOrderGetTime));
         invoker.AddCommand(new MoveToCommand(go.GetComponent<CustomerMovementController>(), destBar, door, new Vector3(1.28f / 2, 1.28f + 1, 0)));
         invoker.AddCommand(new DestroyCommand(go.GetComponent<CustomerDestroyer>(), customers, 1));
     }

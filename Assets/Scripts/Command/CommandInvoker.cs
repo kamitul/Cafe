@@ -30,7 +30,6 @@ public class CommandInvoker : MonoBehaviour
             }
             catch (TaskCanceledException)
             {
-                return;
             }
         }
     }
