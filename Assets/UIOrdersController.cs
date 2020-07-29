@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIOrdersController : MonoBehaviour
@@ -24,7 +25,7 @@ public class UIOrdersController : MonoBehaviour
     public void AddOrder(Order order)
     {
         GameObject orderGO = Instantiate(orderElementPrefab, orderSpawnTransform);
-        orderGO.SetActive(false);
+        orderGO.SetActive(orders.Count < MaxOrdersOnUIList);
         Order instantiatedOrder = orderGO.GetComponent<Order>();
         instantiatedOrder.SetButtonText(order);
         orders.Add(Instantiate(orderElementPrefab, orderSpawnTransform).GetComponent<Order>());
@@ -32,7 +33,10 @@ public class UIOrdersController : MonoBehaviour
 
     private void DeleteOrder(Order orderToDelete)
     {
-        //usuwanie ordera z ui i z listy
+        orders.Remove(orderToDelete);
+        Destroy(orderToDelete.gameObject);
+        orders.Last().gameObject.SetActive(orders.Count < MaxOrdersOnUIList);
+        //usuwanie ordera z ui i z listy i aktywowanie poprzednika usuniętego jeżeli jes to możliwe
     }
 
 }
