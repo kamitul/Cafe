@@ -25,7 +25,7 @@ public class UIOrdersController : MonoBehaviour
         //dodawanie ordera do ui i listy
         GameObject orderGO = Instantiate(orderElementPrefab, orderSpawnTransform);
         Order instantiatedOrder = orderGO.GetComponent<Order>();
-        instantiatedOrder.InitializeOrder(order);
+        instantiatedOrder.SetButtonText(order);
         orders.Add(Instantiate(orderElementPrefab, orderSpawnTransform).GetComponent<Order>());
     }
 

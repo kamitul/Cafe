@@ -43,6 +43,7 @@ public class CustomerOrderController : MonoBehaviour
         isClicked = true;
         //placeholder
         order.CustomerName = "Mark";
+        order.OrderIdentfier = Guid.NewGuid();
         OnOrderMade?.Invoke(order);
     }
 }
