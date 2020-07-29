@@ -41,8 +41,8 @@ public class OrderCommand : Command
         }
 
         bool coffeMade = false;
-        CoffeeMakingController.OnProperCoffePrepared += () => coffeMade = true;
-        CoffeeMakingController.OnWrongCoffePrepared += () => coffeMade = true;
+        //CoffeeMakingController.OnProperCoffePrepared += () => coffeMade = true;
+        //CoffeeMakingController.OnWrongCoffePrepared += () => coffeMade = true;
         
         counter = 0f;
 

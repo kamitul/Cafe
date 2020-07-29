@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CoffeeMakingController : MonoBehaviour
 {
-    public static Action OnProperCoffePrepared;
-    public static Action OnWrongCoffePrepared;
+    public static Action<Order> OnProperCoffePrepared;
+    public static Action<Order> OnWrongCoffePrepared;
     public static Action<Order> OnOrderDelete;
 
     [SerializeField] private IngredientSpotsController ingredientSpotsController;
@@ -47,12 +47,12 @@ public class CoffeeMakingController : MonoBehaviour
 
             if (ListEqualier.UnorderedEqual(properIngredients, mixedIngredients))
             {
-                OnProperCoffePrepared?.Invoke();
+                OnProperCoffePrepared?.Invoke(order);
                 Debug.Log("U prepared proper coffee");
             }
             else
             {
-                OnWrongCoffePrepared?.Invoke();
+                OnWrongCoffePrepared?.Invoke(order);
                 Debug.Log("U Fucked up , try again");
             }
             OnOrderDelete.Invoke(order);
