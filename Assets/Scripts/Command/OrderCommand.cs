@@ -20,7 +20,7 @@ public class OrderCommand : Command
     public override async Task Execute()
     {
         counter = 0f;
-        cnt.Randomize();
+        cnt.RandomizeCoffee();
         cnt.ShowUI();
 
         while(cnt.IsClicked() == false)

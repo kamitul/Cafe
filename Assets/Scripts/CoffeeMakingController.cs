@@ -7,19 +7,18 @@ public class CoffeeMakingController : MonoBehaviour
 {
     public static Action OnProperCoffePrepared;
     public static Action OnWrongCoffePrepared;
+    public static Action<Order> OnOrderDelete;
 
     [SerializeField] private IngredientSpotsController ingredientSpotsController;
-    [SerializeField] private List<Coffee> Coffees;
     private List<IngredientType> mixedIngredients = new List<IngredientType>();
-    private Coffee orderedCoffee;
+    private Order order;
     
-    
-    
-    private void Initialize(Coffee orderedCoffee)
+    private void Initialize(Order _order)
     {
-        this.orderedCoffee = this.orderedCoffee;
+        this.order = _order;
         int wholeAmountOfIngredients = 0;
-        foreach (var coffeePart in orderedCoffee.IngredientsToMakeCoffee)
+
+        foreach (var coffeePart in order.OrderedCoffee.IngredientsToMakeCoffee)
         {
             wholeAmountOfIngredients += coffeePart.IngredientAmount;
         }
@@ -38,7 +37,7 @@ public class CoffeeMakingController : MonoBehaviour
         if (mixedIngredients != null)
         {
             List<IngredientType> properIngredients = new List<IngredientType>();
-            foreach (var coffeePart in orderedCoffee.IngredientsToMakeCoffee)
+            foreach (var coffeePart in order.OrderedCoffee.IngredientsToMakeCoffee)
             {
                 for (int i = 0; i < coffeePart.IngredientAmount; i++)
                 {
@@ -56,6 +55,7 @@ public class CoffeeMakingController : MonoBehaviour
                 OnWrongCoffePrepared?.Invoke();
                 Debug.Log("U Fucked up , try again");
             }
+            OnOrderDelete.Invoke(order);
         }
         else
         {

@@ -845,7 +845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.7890231}
   m_AnchorMax: {x: 1, y: 0.90000004}
-  m_AnchoredPosition: {x: 0, y: 4.100006}
+  m_AnchoredPosition: {x: 0, y: 4.1000366}
   m_SizeDelta: {x: 0, y: -8.200066}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7670235281679970794
@@ -1011,7 +1011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.020136217}
   m_AnchorMax: {x: 1, y: 0.7890231}
-  m_AnchoredPosition: {x: 0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3522764954688263274
@@ -2471,7 +2471,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a98c296556d912949942fbba1bb2f9bf, type: 2}
   - {fileID: 11400000, guid: 1d6945e48a0481146a6b987cb9b3e9aa, type: 2}
   - {fileID: 11400000, guid: 7b1b2b918fba517419110243594d3f9a, type: 2}
-  orderedCoffee: {fileID: 11400000, guid: d9953f39afb9e7146a1cd4b4c8d474db, type: 2}
 --- !u!1 &2778144977748728860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3317,6 +3316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3221347481327527824}
+  - component: {fileID: 3320512873789522241}
   m_Layer: 5
   m_Name: Orders
   m_TagString: Untagged
@@ -3345,6 +3345,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3320512873789522241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2876612008485780084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c19f6c86dab8234c8e9d3df38be1075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orderElementPrefab: {fileID: 0}
 --- !u!1 &3214441963059619706
 GameObject:
   m_ObjectHideFlags: 0
@@ -5618,6 +5631,7 @@ MonoBehaviour:
   spotPrefab: {fileID: 2685241636856888217, guid: 638483596d7234e4580d8779a31e83a9,
     type: 3}
   spotsSpawnTransform: {fileID: 1266755124253961769}
+  orderText: {fileID: 0}
 --- !u!1 &8992995628327943345
 GameObject:
   m_ObjectHideFlags: 0
