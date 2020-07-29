@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class IngredientSpotsController : MonoBehaviour
 {
     [SerializeField] private GameObject spotPrefab;
     [SerializeField] private Transform spotsSpawnTransform;
-    [SerializeField] private TextMes
+    [SerializeField] private TextMeshPro orderText;
+
+
     private List<IngredientSpot> spawnedIngredientSpots = new List<IngredientSpot>();
     private int displayedIngredientsAmount = 0;
     public void InitializeIngredientSpots(int orderedCoffeeIngredientsAmount)
