@@ -6,7 +6,8 @@ using UnityEngine;
 public class CustomerOrderController : MonoBehaviour
 {
     [SerializeField] private Coffees coffees;
-
+    [SerializeField] private GameObject orderIndicator;
+    
     private Coffee coffee;
 
     public static Action<Coffee> OnOrderMade;

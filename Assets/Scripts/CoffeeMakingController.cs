@@ -11,12 +11,13 @@ public class CoffeeMakingController : MonoBehaviour
     [SerializeField] private IngredientSpotsController ingredientSpotsController;
     [SerializeField] private List<Coffee> Coffees;
     private List<IngredientType> mixedIngredients = new List<IngredientType>();
+    private Coffee orderedCoffee;
     
-    [Header("For testing only")]
-    public  Coffee orderedCoffee;
     
-    private void Start()
+    
+    private void Initialize(Coffee orderedCoffee)
     {
+        this.orderedCoffee = this.orderedCoffee;
         int wholeAmountOfIngredients = 0;
         foreach (var coffeePart in orderedCoffee.IngredientsToMakeCoffee)
         {

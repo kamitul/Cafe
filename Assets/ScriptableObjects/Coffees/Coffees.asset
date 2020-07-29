@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b63fe26834c00c94b9d4d1e29744e8c4, type: 3}
+  m_Name: Coffees
+  m_EditorClassIdentifier: 
+  coffes:
+  - {fileID: 11400000, guid: d9953f39afb9e7146a1cd4b4c8d474db, type: 2}
+  - {fileID: 11400000, guid: 0ac433584e165b643b0c69371db9d381, type: 2}
+  - {fileID: 11400000, guid: 7244bb2a1abddc14b9dec3754131cacf, type: 2}
+  - {fileID: 11400000, guid: 87a11cbf041897647ad8f27f04d4bd78, type: 2}
+  - {fileID: 11400000, guid: 526663b98e883f042a79d8f115296642, type: 2}
+  - {fileID: 11400000, guid: 8c1c06afce5272b44863db9692fbca4d, type: 2}
+  - {fileID: 11400000, guid: db5d1a49d8ddb0948b88cf2a54688ee6, type: 2}
+  - {fileID: 11400000, guid: b839e7e0db05f934aafeec0bbc56775e, type: 2}
+  - {fileID: 11400000, guid: a98c296556d912949942fbba1bb2f9bf, type: 2}
+  - {fileID: 11400000, guid: 1d6945e48a0481146a6b987cb9b3e9aa, type: 2}
+  - {fileID: 11400000, guid: 7b1b2b918fba517419110243594d3f9a, type: 2}
