@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIOrdersController : MonoBehaviour
 {
     [SerializeField] private GameObject orderElementPrefab;
     [SerializeField] private Transform orderSpawnTransform;
+    [SerializeField] private CoffeeMakingController coffeeMakingController;
     private List<Order> orders;
     private const int MaxOrdersOnUIList = 4;
 
@@ -20,6 +22,7 @@ public class UIOrdersController : MonoBehaviour
     private void OnDisable()
     {
         CustomerOrderController.OnOrderMade -= AddOrder;
+        CoffeeMakingController.OnOrderDelete += DeleteOrder;
     }
 
     public void AddOrder(Order order)
@@ -27,6 +30,8 @@ public class UIOrdersController : MonoBehaviour
         GameObject orderGO = Instantiate(orderElementPrefab, orderSpawnTransform);
         orderGO.SetActive(orders.Count < MaxOrdersOnUIList);
         Order instantiatedOrder = orderGO.GetComponent<Order>();
+        Button orderButtonComponent = orderGO.GetComponent<Button>();
+        orderButtonComponent.onClick.AddListener(() => instantiatedOrder.OnOrderButtonClick(coffeeMakingController));
         instantiatedOrder.SetButtonText(order);
         orders.Add(Instantiate(orderElementPrefab, orderSpawnTransform).GetComponent<Order>());
     }

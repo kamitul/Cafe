@@ -376,135 +376,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &638833946012830182
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4322221641098436387}
-  - component: {fileID: 5968603046210506269}
-  - component: {fileID: 1243252469913270788}
-  - component: {fileID: 4362842112693423523}
-  m_Layer: 5
-  m_Name: CloseButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &4322221641098436387
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638833946012830182}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7571366395912541766}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: -20}
-  m_SizeDelta: {x: 50, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5968603046210506269
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638833946012830182}
-  m_CullTransparentMesh: 0
---- !u!114 &1243252469913270788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638833946012830182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1583fe843e2df6043a87bbdfb45b9a16, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &4362842112693423523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638833946012830182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1243252469913270788}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2778144977707613526}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1228585496974700583
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,18 +2330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientSpotsController: {fileID: 900336422035282125}
-  Coffees:
-  - {fileID: 11400000, guid: 0ac433584e165b643b0c69371db9d381, type: 2}
-  - {fileID: 11400000, guid: d9953f39afb9e7146a1cd4b4c8d474db, type: 2}
-  - {fileID: 11400000, guid: 7244bb2a1abddc14b9dec3754131cacf, type: 2}
-  - {fileID: 11400000, guid: 87a11cbf041897647ad8f27f04d4bd78, type: 2}
-  - {fileID: 11400000, guid: 526663b98e883f042a79d8f115296642, type: 2}
-  - {fileID: 11400000, guid: 8c1c06afce5272b44863db9692fbca4d, type: 2}
-  - {fileID: 11400000, guid: db5d1a49d8ddb0948b88cf2a54688ee6, type: 2}
-  - {fileID: 11400000, guid: b839e7e0db05f934aafeec0bbc56775e, type: 2}
-  - {fileID: 11400000, guid: a98c296556d912949942fbba1bb2f9bf, type: 2}
-  - {fileID: 11400000, guid: 1d6945e48a0481146a6b987cb9b3e9aa, type: 2}
-  - {fileID: 11400000, guid: 7b1b2b918fba517419110243594d3f9a, type: 2}
 --- !u!1 &2778144977748728860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,7 +3216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c19f6c86dab8234c8e9d3df38be1075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orderElementPrefab: {fileID: 0}
+  orderElementPrefab: {fileID: 4008192240645927597, guid: f4b3e0b18ed3e7c4c8a39db6a55cce52,
+    type: 3}
+  orderSpawnTransform: {fileID: 1679503727005095255}
+  coffeeMakingController: {fileID: 2778144977707613545}
 --- !u!1 &3214441963059619706
 GameObject:
   m_ObjectHideFlags: 0
@@ -4740,7 +4602,6 @@ RectTransform:
   - {fileID: 2778144977593212828}
   - {fileID: 2840346127112637709}
   - {fileID: 2778144976606607476}
-  - {fileID: 4322221641098436387}
   m_Father: {fileID: 2778144977403092881}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5631,7 +5492,7 @@ MonoBehaviour:
   spotPrefab: {fileID: 2685241636856888217, guid: 638483596d7234e4580d8779a31e83a9,
     type: 3}
   spotsSpawnTransform: {fileID: 1266755124253961769}
-  orderText: {fileID: 0}
+  orderText: {fileID: 7649267464134410324}
 --- !u!1 &8992995628327943345
 GameObject:
   m_ObjectHideFlags: 0

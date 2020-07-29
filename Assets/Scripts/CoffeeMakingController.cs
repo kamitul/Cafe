@@ -13,7 +13,7 @@ public class CoffeeMakingController : MonoBehaviour
     private List<IngredientType> mixedIngredients = new List<IngredientType>();
     private Order order;
     
-    private void Initialize(Order _order)
+    public void Initialize(Order _order)
     {
         this.order = _order;
         int wholeAmountOfIngredients = 0;
@@ -23,6 +23,7 @@ public class CoffeeMakingController : MonoBehaviour
             wholeAmountOfIngredients += coffeePart.IngredientAmount;
         }
         ingredientSpotsController.InitializeIngredientSpots(wholeAmountOfIngredients);
+        ingredientSpotsController.InitializeIngredientSpotsText(Order.GetCoffeeName(order.OrderedCoffee.CoffeeType.ToString()));
     }
 
     public void AddIngredient(Ingredient ingredient)
@@ -61,5 +62,12 @@ public class CoffeeMakingController : MonoBehaviour
         {
             Debug.Log(string.Format("Try to mix some ingredients in order to make coffee"));
         }
+    }
+
+    public void ResetCoffeeMakeController()
+    {
+        mixedIngredients.Clear();
+        order = null;
+        ingredientSpotsController.ResetIngredientSpots();
     }
 }

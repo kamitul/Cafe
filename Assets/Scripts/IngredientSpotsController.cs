@@ -8,8 +8,9 @@ public class IngredientSpotsController : MonoBehaviour
 {
     [SerializeField] private GameObject spotPrefab;
     [SerializeField] private Transform spotsSpawnTransform;
-    [SerializeField] private TextMeshPro orderText;
+    [SerializeField] private TextMeshProUGUI orderText;
 
+    private string UNeedToPrepareTextPrefix = "You need to prepare : ";
 
     private List<IngredientSpot> spawnedIngredientSpots = new List<IngredientSpot>();
     private int displayedIngredientsAmount = 0;
@@ -19,6 +20,11 @@ public class IngredientSpotsController : MonoBehaviour
         {
             spawnedIngredientSpots.Add(Instantiate(spotPrefab, spotsSpawnTransform).GetComponent<IngredientSpot>());
         }
+    }
+
+    public void InitializeIngredientSpotsText(string CoffeTypeString)
+    {
+        orderText.text = UNeedToPrepareTextPrefix + CoffeTypeString;
     }
 
     public void DisplayIngredientOnSpot(Sprite ingredientSpriteToShow)

@@ -20,8 +20,13 @@ public class Order : MonoBehaviour
         buttonText.text = GetCoffeeName(coffeeType.ToString()) + ButtonTextPart + customerName;
     }
 
-    private string GetCoffeeName(string coffeeTypeString)
+    public static string GetCoffeeName(string coffeeTypeString)
     {
         return coffeeTypeString.Contains("_") ? coffeeTypeString : coffeeTypeString.Remove(coffeeTypeString.IndexOf("_"), coffeeTypeString.Length);
+    }
+
+    public void OnOrderButtonClick(CoffeeMakingController coffeeMakingController)
+    {
+        coffeeMakingController.Initialize(this);
     }
 }
