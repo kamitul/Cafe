@@ -74,11 +74,19 @@ public class BasicCafe : IBuilder
 
     private int CreateEnviroment(System.Random engine, int rand)
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
         {
             rand = engine.Next(2, width - 1);
             tiles[rand][height - 1].AddId(6);
         }
+
+        for (int i = 2; i < width - 1; i += 3)
+        {
+            tiles[i][height - 1].AddId(11);
+        }
+
+        tiles[1][height - 2].AddId(12);
+        tiles[width - 2][height - 2].AddId(12);
 
         return rand;
     }

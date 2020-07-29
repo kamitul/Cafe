@@ -11,7 +11,7 @@ public class MultipleTile : TileBase
 
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
-        tileData.sprite = sprite[Random.Range(0, sprite.Length - 1)];
+        tileData.sprite = sprite[Random.Range(0, sprite.Length)];
 
         if (Collideable)
             tileData.colliderType = Tile.ColliderType.Sprite;
