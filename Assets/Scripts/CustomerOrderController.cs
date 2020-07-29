@@ -9,9 +9,9 @@ public class CustomerOrderController : MonoBehaviour
     [SerializeField] private Coffees coffees;
     [SerializeField] private GameObject orderIndicator;
 
-    private Order order = new Order();
+    private OrderInfo orderInfo = new OrderInfo();
     private bool isClicked = false;
-    public static Action<Order> OnOrderMade;
+    public static Action<OrderInfo> OnOrderMade;
     public Guid CustomerGUID;
 
     private void Awake()
@@ -31,7 +31,8 @@ public class CustomerOrderController : MonoBehaviour
 
     public void RandomizeCoffee()
     {
-        order.OrderedCoffee = coffees.GetRandomCoffee();
+        orderInfo = new OrderInfo();
+        orderInfo.OrderedCoffee = coffees.GetRandomCoffee();
     }
 
     public bool IsClicked()
@@ -43,8 +44,8 @@ public class CustomerOrderController : MonoBehaviour
     {
         isClicked = true;
         CustomerGUID = Guid.NewGuid();
-        order.CustomerName = "Mark";
-        order.OrderIdentfier = CustomerGUID;
-        OnOrderMade?.Invoke(order);
+        orderInfo.CustomerName = "Mark";
+        orderInfo.OrderIdentfier = CustomerGUID;
+        OnOrderMade?.Invoke(orderInfo);
     }
 }

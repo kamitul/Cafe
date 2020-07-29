@@ -10,7 +10,7 @@ public class UIOrdersController : MonoBehaviour
     [SerializeField] private GameObject orderElementPrefab;
     [SerializeField] private Transform orderSpawnTransform;
     [SerializeField] private CoffeeMakingController coffeeMakingController;
-    private List<Order> orders;
+    private List<Order> orders = new List<Order>();
     private const int MaxOrdersOnUIList = 4;
 
     private void OnEnable()
@@ -25,22 +25,28 @@ public class UIOrdersController : MonoBehaviour
         CoffeeMakingController.OnOrderDelete += DeleteOrder;
     }
 
-    public void AddOrder(Order order)
+    public void AddOrder(OrderInfo orderInfo)
     {
         GameObject orderGO = Instantiate(orderElementPrefab, orderSpawnTransform);
-        orderGO.SetActive(orders.Count < MaxOrdersOnUIList);
         Order instantiatedOrder = orderGO.GetComponent<Order>();
+        instantiatedOrder.OrderedCoffee = orderInfo.OrderedCoffee;
+        instantiatedOrder.CustomerName = orderInfo.CustomerName;
+        instantiatedOrder.OrderIdentfier = orderInfo.OrderIdentfier;
+        orders.Add(instantiatedOrder);
+        orderGO.SetActive(orders.Count < MaxOrdersOnUIList);
         Button orderButtonComponent = orderGO.GetComponent<Button>();
+        instantiatedOrder.SetButtonText();
         orderButtonComponent.onClick.AddListener(() => instantiatedOrder.OnOrderButtonClick(coffeeMakingController));
-        instantiatedOrder.SetButtonText(order);
-        orders.Add(Instantiate(orderElementPrefab, orderSpawnTransform).GetComponent<Order>());
     }
 
     private void DeleteOrder(Order orderToDelete)
     {
         orders.Remove(orderToDelete);
         Destroy(orderToDelete.gameObject);
-        orders.Last().gameObject.SetActive(orders.Count < MaxOrdersOnUIList);
+        if (orders.Count > 0)
+        {
+            orders.Last().gameObject.SetActive(orders.Count < MaxOrdersOnUIList);
+        }
         //usuwanie ordera z ui i z listy i aktywowanie poprzednika usuniętego jeżeli jes to możliwe
     }
 

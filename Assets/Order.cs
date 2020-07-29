@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class Order : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro buttonText;
+    [SerializeField] private TextMeshProUGUI buttonText;
 
     private const string ButtonTextPart = " for ";
     public Coffee OrderedCoffee { get; set; }
     public string CustomerName { get; set; }
     public Guid OrderIdentfier { get; set; }
 
-    public void SetButtonText(Order order)
+    public void SetButtonText()
     {
-        CoffeeType coffeeType = order.OrderedCoffee.CoffeeType;
-        string customerName = order.CustomerName;
-        buttonText.text = GetCoffeeName(coffeeType.ToString()) + ButtonTextPart + customerName;
+        buttonText.text = GetCoffeeName(OrderedCoffee.CoffeeType.ToString()) + ButtonTextPart + CustomerName;
     }
 
     public static string GetCoffeeName(string coffeeTypeString)
     {
-        return coffeeTypeString.Contains("_") ? coffeeTypeString : coffeeTypeString.Remove(coffeeTypeString.IndexOf("_"), coffeeTypeString.Length);
+        return coffeeTypeString.Contains("_") ? coffeeTypeString.Replace("_", " ") : coffeeTypeString;
     }
 
     public void OnOrderButtonClick(CoffeeMakingController coffeeMakingController)
     {
         coffeeMakingController.Initialize(this);
+        GetComponent<Button>().interactable = false;
     }
 }

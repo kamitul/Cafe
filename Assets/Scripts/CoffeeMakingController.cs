@@ -57,6 +57,7 @@ public class CoffeeMakingController : MonoBehaviour
                 Debug.Log("U Fucked up , try again");
             }
             OnOrderDelete.Invoke(order);
+            ResetCoffeeMakeController();
         }
         else
         {

@@ -52,5 +52,6 @@ public class IngredientSpotsController : MonoBehaviour
         }
         spawnedIngredientSpots?.Clear();
         displayedIngredientsAmount = 0;
+        orderText.text = " ";
     }
 }
