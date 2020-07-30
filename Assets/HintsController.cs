@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class HintsController : MonoBehaviour
 {
+    //nahama
+    public static Action<Order> OnShowHint;
+
     [SerializeField] private GameObject hintPrefab;
     [SerializeField] private Transform hintSpawnTransfom;
     [SerializeField] private TextMeshProUGUI hintCoffeText;
@@ -14,6 +18,12 @@ public class HintsController : MonoBehaviour
 
     List<Hint> hints = new List<Hint>();
     Coffee orderedCoffe;
+
+    private void Awake()
+    {
+        ToggleHintContentUI(false);
+        ToggleHintButtonUI(false);
+    }
 
     public void InitializeHintsController(Order order)
     {
@@ -43,6 +53,7 @@ public class HintsController : MonoBehaviour
             hint.InitializeHint(ingredient.IngredientAmount.ToString(), ingredient.Sprite);
             hints.Add(hint);
         }
+        OnShowHint.Invoke(null);
     }
 
     public void ToggleHintButtonUI(bool enabled)
