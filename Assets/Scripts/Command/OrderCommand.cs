@@ -12,6 +12,7 @@ public class OrderCommand : Command
     private float counter;
 
     private bool coffeMade = false;
+    private bool isCorrect;
 
     public OrderCommand(CustomerOrderController cnt, float makeOrderLimitTime, float getOrderLimitTime)
     {
@@ -24,7 +25,7 @@ public class OrderCommand : Command
     {
         counter = 0f;
         cnt.RandomizeCoffee();
-        cnt.ShowUI();
+        cnt.ToggleSetOrder(true);
 
         while(cnt.IsClicked() == false)
         {
@@ -37,16 +38,17 @@ public class OrderCommand : Command
             await Task.Delay(100);
         }
 
-        cnt.HideUI();
+        cnt.ToggleSetOrder(false);
         if (!cnt.IsClicked())
         {
+            cnt.RecieveOrder(false);
             return;
         }
 
+        cnt.ToggleWaitForOrder(true);
         coffeMade = false;
-        CoffeeMakingController.OnProperCoffePrepared += CheckForCoffe;
-        CoffeeMakingController.OnWrongCoffePrepared += CheckForCoffe;
-        
+        CoffeeMakingController.OnProperCoffePrepared += (Order order) => { isCorrect = true; CheckForCoffe(order); };
+        CoffeeMakingController.OnWrongCoffePrepared += (Order order) => { isCorrect = false; CheckForCoffe(order); };
         counter = 0f;
 
         while (!coffeMade)
@@ -57,6 +59,18 @@ public class OrderCommand : Command
 
             await Task.Delay(100);
         }
+
+        cnt.ToggleWaitForOrder(false);
+
+        if (!coffeMade)
+        {
+            cnt.RecieveOrder(false);
+            return;
+        }
+
+        cnt.ToggleDoneOrder(true);
+        await Task.Delay(500);
+        cnt.ToggleDoneOrder(false);
     }
 
     private void CheckForCoffe(Order obj)
@@ -64,6 +78,7 @@ public class OrderCommand : Command
         if(obj.OrderIdentfier == cnt.CustomerGUID)
         {
             coffeMade = true;
+            cnt.RecieveOrder(isCorrect);
         }
     }
 }

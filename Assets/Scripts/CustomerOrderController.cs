@@ -8,6 +8,9 @@ public class CustomerOrderController : MonoBehaviour
 {
     [SerializeField] private Coffees coffees;
     [SerializeField] private GameObject orderIndicator;
+    [SerializeField] private GameObject waitingIndicator;
+    [SerializeField] private GameObject doneIndicator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private OrderInfo orderInfo = new OrderInfo();
     private bool isClicked = false;
@@ -19,14 +22,19 @@ public class CustomerOrderController : MonoBehaviour
         isClicked = false;
     }
 
-    public void ShowUI()
+    public void ToggleSetOrder(bool flag)
     {
-        orderIndicator.SetActive(true);
+        orderIndicator.SetActive(flag);
     }
 
-    public void HideUI()
+    public void ToggleWaitForOrder(bool flag)
     {
-        orderIndicator.SetActive(false);
+        waitingIndicator.SetActive(flag);
+    }
+
+    public void ToggleDoneOrder(bool flag)
+    {
+        doneIndicator.SetActive(flag);
     }
 
     public void RandomizeCoffee()
@@ -47,5 +55,10 @@ public class CustomerOrderController : MonoBehaviour
         orderInfo.CustomerName = "Mark";
         orderInfo.OrderIdentfier = CustomerGUID;
         OnOrderMade?.Invoke(orderInfo);
+    }
+
+    public void RecieveOrder(bool isCorrect)
+    {
+        spriteRenderer.materials[0].color = isCorrect ? Color.green : Color.red;
     }
 }
