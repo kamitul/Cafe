@@ -21,7 +21,6 @@ public class MoveToCommand : Command
     public override async Task Execute()
     {
         BoxTile destTile = await FindDestTile();
-        Debug.Log("FOUND DEST TILE");
         movementController.MoveToPoint((Vector3)destTile.Position * 1.28f + offset);
 
         while (movementController.GetDistance() > Mathf.Epsilon)

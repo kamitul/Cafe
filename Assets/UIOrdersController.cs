@@ -35,7 +35,7 @@ public class UIOrdersController : MonoBehaviour
         Button orderButtonComponent = orderGO.GetComponent<Button>();
 
         orders.Add(instantiatedOrder);
-        orderGO.SetActive(orders.Count < MaxOrdersOnUIList);
+        orderGO.SetActive(orders.Count <= MaxOrdersOnUIList);
         instantiatedOrder.SetButtonText();
         orderButtonComponent.interactable = !coffeeMakingController.IsMakingOrder;
         orderButtonComponent.onClick.AddListener(() => instantiatedOrder.OnOrderButtonClick(coffeeMakingController));

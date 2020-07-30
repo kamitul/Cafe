@@ -51,7 +51,6 @@ public class IngredientSpotsController : MonoBehaviour
             Destroy(ingredientSpot.gameObject);
         }
         spawnedIngredientSpots?.Clear();
-        Debug.LogError(spawnedIngredientSpots.Count);
         displayedIngredientsAmount = 0;
         orderText.text = " ";
     }

@@ -27,8 +27,9 @@ public class HintsController : MonoBehaviour
         {
             Destroy(hint.gameObject);
         }
+        hints.Clear();
         orderedCoffe = null;
-        ToggleHintButtonUI(true);
+        ToggleHintButtonUI(false);
         ToggleHintContentUI(false);
     }
 
