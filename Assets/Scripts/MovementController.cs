@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class CustomerMovementController : MonoBehaviour, ITickable
+public class MovementController : MonoBehaviour, ITickable
 {
     [Range(1f,4f)]
     public float Speed = 2f;
@@ -24,6 +24,11 @@ public class CustomerMovementController : MonoBehaviour, ITickable
     {
         if(isMoving)
             transform.position = Vector3.MoveTowards(transform.position, destination, Speed * Time.deltaTime);
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 
     public float GetDistance()

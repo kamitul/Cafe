@@ -43,25 +43,17 @@ public class CustomerSpawner : MonoBehaviour
 
     private void PrepareCommands(GameObject go)
     {
-        var door = mapGenerator.GetTile(5)[0];
+        var door = mapGenerator.GetTile(5);
         var stools = mapGenerator.GetTile(10);
         var bars = mapGenerator.GetTile(8).Concat(mapGenerator.GetTile(9)).ToList();
 
-        var destStools = stools.FindAll(x => x.Status != TileStatus.OCCUPIED);
-        var destStool = stools[UnityEngine.Random.Range(0, destStools.Count - 1)];
-        destStool.Status = TileStatus.OCCUPIED;
-
-        var destBars = bars.FindAll(x => x.Status != TileStatus.OCCUPIED);
-        var destBar = destBars[UnityEngine.Random.Range(0, destBars.Count - 1)];
-        destBar.Status = TileStatus.OCCUPIED;
-
         CommandInvoker invoker = go.GetComponent<CommandInvoker>();
-
-        invoker.AddCommand(new MoveToCommand(go.GetComponent<CustomerMovementController>(), door, destStool, new Vector3(1.28f / 2, 1.28f, 0)));
-        invoker.AddCommand(new DelayCommand(go.GetComponent<CustomerMovementController>(), UnityEngine.Random.Range(3,10)));
-        invoker.AddCommand(new MoveToCommand(go.GetComponent<CustomerMovementController>(), destStool, destBar, new Vector3(-1.28f / 2, 2.28f, 0)));
+        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), stools, new Vector3(1.28f / 2, 1.28f, 0)));
+        invoker.AddCommand(new DelayCommand(go.GetComponent<MovementController>(), UnityEngine.Random.Range(3,10)));
+        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), bars, new Vector3(-1.28f / 2, 2.28f, 0)));
         invoker.AddCommand(new OrderCommand(go.GetComponent<CustomerOrderController>(), MaxOrderMakeTime, MaxOrderGetTime));
-        invoker.AddCommand(new MoveToCommand(go.GetComponent<CustomerMovementController>(), destBar, door, new Vector3(1.28f / 2, 1.28f + 1, 0)));
+        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), door, new Vector3(1.28f / 2, 1.28f + 1, 0)));
         invoker.AddCommand(new DestroyCommand(go.GetComponent<CustomerDestroyer>(), customers, 1));
+        invoker.isLooping = false;
     }
 }

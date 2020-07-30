@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class DelayCommand : Command
 {
-    private CustomerMovementController movementController;
+    private MovementController movementController;
     private int delay;
 
-    public DelayCommand(CustomerMovementController moveController, int delay)
+    public DelayCommand(MovementController moveController, int delay)
     {
         this.movementController = moveController;
         this.delay = delay;

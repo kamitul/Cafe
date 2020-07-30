@@ -121,6 +121,10 @@ public class BasicCafe : IBuilder
 
         for (; barStart.y < 7; barStart.y++)
         {
+            for (int i = barStart.x + 1; i < width - 1; ++i)
+            {
+                tiles[i][barStart.y - 1] = new BoxTile(new Vector3Int(i, barStart.y - 1, 0), 13);
+            }
             tiles[barStart.x][barStart.y].AddId(9);
         }
 

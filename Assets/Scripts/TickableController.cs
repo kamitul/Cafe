@@ -29,7 +29,7 @@ public class TickableContainter
 }
 
 
-public class CustomerController : MonoBehaviour
+public class TickableController : MonoBehaviour
 {
     [SerializeField]
     private TickableContainter tickables;
@@ -37,11 +37,6 @@ public class CustomerController : MonoBehaviour
     private void Awake()
     {
         tickables = new TickableContainter(GetComponents<ITickable>().ToList());
-    }
-
-    private void Start()
-    {
-        GetComponent<CommandInvoker>().Run();
     }
 
     private void Update()
