@@ -21,9 +21,13 @@ public class MoveToCommand : Command
     {
         var currentTile = tiles.Find(x => x.Position == (movementController.GetPosition() / 1.28f));
         var destTiles = tiles.FindAll(x => x.Status != TileStatus.OCCUPIED);
-        var destTile = destTiles[Random.Range(0, destTiles.Count - 1)];
+        BoxTile destTile;
+        if (destTiles.Count > 0)
+            destTile = destTiles[Random.Range(0, destTiles.Count - 1)];
+        else
+            destTile = tiles[Random.Range(0, tiles.Count - 1)];
 
-        if(currentTile != null)
+        if (currentTile != null)
             currentTile.Status = TileStatus.AVAILABLE;
         destTile.Status = TileStatus.OCCUPIED;
 
