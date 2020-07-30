@@ -2081,5 +2081,10 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1166133049}
+    - target: {fileID: 6311331443990370435, guid: 945bd85cc0cc99a4bbb38276b1fdc6b4,
+        type: 3}
+      propertyPath: MaxCustomers
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945bd85cc0cc99a4bbb38276b1fdc6b4, type: 3}

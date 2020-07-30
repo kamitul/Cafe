@@ -18,7 +18,9 @@ public class PlayerSpawner : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        var go = Instantiate(playerPrefab, (Vector3)mapGenerator.GetTile(13)[UnityEngine.Random.Range(0, mapGenerator.GetTile(13).Count)].Position * 1.28f, Quaternion.identity, null);
+        var tile = mapGenerator.GetTile(13)[UnityEngine.Random.Range(0, mapGenerator.GetTile(13).Count)];
+        var go = Instantiate(playerPrefab, (Vector3)tile.Position * 1.28f, Quaternion.identity, null);
+        go.GetComponent<MovementController>().StopAt(tile);
         PrepareCommands(go);
     }
 

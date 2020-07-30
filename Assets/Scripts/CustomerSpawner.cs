@@ -35,7 +35,7 @@ public class CustomerSpawner : MonoBehaviour
     private void SpawnCustomer()
     {
         var go = Instantiate(customerPrefab, mapGenerator.GetTile(5)[0].Position + new Vector3Int(2, 2, 0), Quaternion.identity, null);
-
+        go.GetComponent<MovementController>().StopAt(mapGenerator.GetTile(5)[0]);
         PrepareCommands(go);
 
         customers.Add(go);

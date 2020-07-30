@@ -2,45 +2,54 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 public class MoveToCommand : Command
 {
     private MovementController movementController;
-    private List<BoxTile> tiles;
+    private List<BoxTile> destTiles;
     private Vector3 offset;
 
-    public MoveToCommand(MovementController moveController, List<BoxTile> tiles, Vector3 offset)
+    public MoveToCommand(MovementController moveController, List<BoxTile> destTiles, Vector3 offset)
     {
         this.movementController = moveController;
-        this.tiles = tiles;
+        this.destTiles = destTiles;
         this.offset = offset;
     }
 
     public override async Task Execute()
     {
-        var currentTile = tiles.Find(x => x.Position == (movementController.GetPosition() / 1.28f));
-        var destTiles = tiles.FindAll(x => x.Status != TileStatus.OCCUPIED);
-        BoxTile destTile;
-        if (destTiles.Count > 0)
-            destTile = destTiles[Random.Range(0, destTiles.Count - 1)];
-        else
-            destTile = tiles[Random.Range(0, tiles.Count - 1)];
-
-        if (currentTile != null)
-            currentTile.Status = TileStatus.AVAILABLE;
-        destTile.Status = TileStatus.OCCUPIED;
+        BoxTile destTile = FindDestTile();
 
         movementController.MoveToPoint((Vector3)destTile.Position * 1.28f + offset);
 
-        while(movementController.GetDistance() > 0.2f)
+        while (movementController.GetDistance() > Mathf.Epsilon)
         {
-            if(token.IsCancellationRequested)
+            if (token.IsCancellationRequested)
                 throw new TaskCanceledException();
 
             await Task.Delay(50);
         }
 
-        movementController.Stop();
+        movementController.StopAt(destTile);
+    }
+
+    private BoxTile FindDestTile()
+    {
+        var destAvTiles = destTiles.FindAll(x => x.Status != TileStatus.OCCUPIED);
+        BoxTile destTile;
+        if (destAvTiles.Count > 0)
+            destTile = destAvTiles[Random.Range(0, destAvTiles.Count - 1)];
+        else
+            destTile = destTiles[Random.Range(0, destTiles.Count - 1)];
+
+        destTile.Status = TileStatus.OCCUPIED;
+        return destTile;
+    }
+
+    private BoxTile FindCurrentTile()
+    {
+        return null;
     }
 }

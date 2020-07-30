@@ -13,11 +13,12 @@ public class MovementController : MonoBehaviour, ITickable
 
     private Vector3 destination;
     private bool isMoving = false;
+    private BoxTile currentTile = null;
 
     private void Awake()
     {
         gifController = GetComponent<GifController>();
-        Stop();
+        StopAt(null);
     }
 
     public void Tick()
@@ -40,13 +41,16 @@ public class MovementController : MonoBehaviour, ITickable
     {
         isMoving = true;
         gifController.Play("Walk");
+        if(currentTile != null)
+            currentTile.Status = TileStatus.AVAILABLE;
         this.destination = destination;
     }
 
-    public void Stop()
+    public void StopAt(BoxTile boxTile)
     {
         isMoving = false;
         gifController.Play("Idle");
+        this.currentTile = boxTile;
         this.destination = transform.position;
     }
 
