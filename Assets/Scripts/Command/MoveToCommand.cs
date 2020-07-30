@@ -20,8 +20,8 @@ public class MoveToCommand : Command
 
     public override async Task Execute()
     {
-        BoxTile destTile = FindDestTile();
-
+        BoxTile destTile = await FindDestTile();
+        Debug.Log("FOUND DEST TILE");
         movementController.MoveToPoint((Vector3)destTile.Position * 1.28f + offset);
 
         while (movementController.GetDistance() > Mathf.Epsilon)
@@ -35,21 +35,17 @@ public class MoveToCommand : Command
         movementController.StopAt(destTile);
     }
 
-    private BoxTile FindDestTile()
+    private async Task<BoxTile> FindDestTile()
     {
-        var destAvTiles = destTiles.FindAll(x => x.Status != TileStatus.OCCUPIED);
+        List<BoxTile> destAvTiles = new List<BoxTile>();
         BoxTile destTile;
-        if (destAvTiles.Count > 0)
-            destTile = destAvTiles[Random.Range(0, destAvTiles.Count - 1)];
-        else
-            destTile = destTiles[Random.Range(0, destTiles.Count - 1)];
-
+        while (destAvTiles.Count < 1)
+        {
+            destAvTiles = destTiles.FindAll(x => x.Status != TileStatus.OCCUPIED);
+            await Task.Delay(100);
+        }
+        destTile = destAvTiles[Random.Range(0, destAvTiles.Count - 1)];
         destTile.Status = TileStatus.OCCUPIED;
         return destTile;
-    }
-
-    private BoxTile FindCurrentTile()
-    {
-        return null;
     }
 }
