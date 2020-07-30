@@ -32,11 +32,14 @@ public class UIOrdersController : MonoBehaviour
         instantiatedOrder.OrderedCoffee = orderInfo.OrderedCoffee;
         instantiatedOrder.CustomerName = orderInfo.CustomerName;
         instantiatedOrder.OrderIdentfier = orderInfo.OrderIdentfier;
+        Button orderButtonComponent = orderGO.GetComponent<Button>();
+
         orders.Add(instantiatedOrder);
         orderGO.SetActive(orders.Count < MaxOrdersOnUIList);
-        Button orderButtonComponent = orderGO.GetComponent<Button>();
         instantiatedOrder.SetButtonText();
+        orderButtonComponent.interactable = !coffeeMakingController.IsMakingOrder;
         orderButtonComponent.onClick.AddListener(() => instantiatedOrder.OnOrderButtonClick(coffeeMakingController));
+        orderButtonComponent.onClick.AddListener(ToggleOrderButtonsOtherThenCurrent);
     }
 
     private void DeleteOrder(Order orderToDelete)
@@ -47,7 +50,16 @@ public class UIOrdersController : MonoBehaviour
         {
             orders.Last().gameObject.SetActive(orders.Count < MaxOrdersOnUIList);
         }
-        //usuwanie ordera z ui i z listy i aktywowanie poprzednika usuniętego jeżeli jes to możliwe
+
+        //ponowna aktywacja buttonów
+        ToggleOrderButtonsOtherThenCurrent();
     }
 
+    private void ToggleOrderButtonsOtherThenCurrent()
+    {
+        foreach (var orderButton in orders)
+        {
+            orderButton.GetComponent<Button>().interactable = !coffeeMakingController.IsMakingOrder;
+        }
+    }
 }

@@ -16,6 +16,7 @@ MonoBehaviour:
   IngredientsToMakeCoffee:
   - IngredientType: 1
     IngredientAmount: 1
+    Sprite: {fileID: 21300000, guid: e47008e0d7a664d4387aa9567958a142, type: 3}
   - IngredientType: 5
     IngredientAmount: 1
-  Texure: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 8ff5ab2516b4381488dd2e60b765cdae, type: 3}
