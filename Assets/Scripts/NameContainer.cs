@@ -33,11 +33,7 @@ public class NameContainer : ScriptableObject
     public void LoadData()
     {
         Names = new NameArray();
-        using(StreamReader sr = new StreamReader(Application.dataPath + "/ScriptableObjects" + "/names.json"))
-        {
-            string json = sr.ReadToEnd();
-            sr.Close();
-            Names = JsonUtility.FromJson<NameArray>(json);
-        }
+        Object obj = Resources.Load("names");
+        Names = JsonUtility.FromJson<NameArray>(obj.ToString());
     }
 }
