@@ -34,7 +34,7 @@ public class OrderCommand : Command
 
             counter += Time.deltaTime;
             if (counter > makeOrderLimitTime)
-            { cnt.BreakOrder(); break; }
+            { break; }
             await Task.Delay(100);
         }
 
