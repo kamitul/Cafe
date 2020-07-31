@@ -15,6 +15,7 @@ public class CustomerOrderController : MonoBehaviour
     private OrderInfo orderInfo = new OrderInfo();
     private bool isClicked = false;
     public static Action<OrderInfo> OnOrderMade;
+    public static Action OnOrderRevoked;
     public Guid CustomerGUID;
     public string Name;
 
@@ -36,6 +37,11 @@ public class CustomerOrderController : MonoBehaviour
     public void ToggleDoneOrder(bool flag)
     {
         doneIndicator.SetActive(flag);
+    }
+
+    public void BreakOrder()
+    {
+        OnOrderRevoked?.Invoke();
     }
 
     public void RandomizeCoffee()

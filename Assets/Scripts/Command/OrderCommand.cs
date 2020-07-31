@@ -34,7 +34,7 @@ public class OrderCommand : Command
 
             counter += Time.deltaTime;
             if (counter > makeOrderLimitTime)
-                break;
+            { cnt.BreakOrder(); break; }
             await Task.Delay(100);
         }
 
@@ -55,8 +55,7 @@ public class OrderCommand : Command
         {
             counter += Time.deltaTime;
             if (counter > makeOrderLimitTime)
-                break;
-
+            { cnt.BreakOrder(); break; }
             await Task.Delay(100);
         }
 
@@ -69,7 +68,7 @@ public class OrderCommand : Command
         }
 
         cnt.ToggleDoneOrder(true);
-        await Task.Delay(500);
+        await Task.Delay(100);
         cnt.ToggleDoneOrder(false);
     }
 
