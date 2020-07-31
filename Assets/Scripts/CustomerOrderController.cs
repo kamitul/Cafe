@@ -16,6 +16,7 @@ public class CustomerOrderController : MonoBehaviour
     private bool isClicked = false;
     public static Action<OrderInfo> OnOrderMade;
     public Guid CustomerGUID;
+    public string Name;
 
     private void Awake()
     {
@@ -52,13 +53,14 @@ public class CustomerOrderController : MonoBehaviour
     {
         isClicked = true;
         CustomerGUID = Guid.NewGuid();
-        orderInfo.CustomerName = "Mark";
+        orderInfo.CustomerName = Name;
         orderInfo.OrderIdentfier = CustomerGUID;
         OnOrderMade?.Invoke(orderInfo);
     }
 
     public void RecieveOrder(bool isCorrect)
     {
-        spriteRenderer.materials[0].color = isCorrect ? Color.green : Color.red;
+        if(spriteRenderer)
+            spriteRenderer.color = isCorrect ? Color.green : Color.red;
     }
 }

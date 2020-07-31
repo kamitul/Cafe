@@ -15,12 +15,20 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField]
     private GameObject customerPrefab;
 
+    [SerializeField]
+    private NameContainer nameContainer;
+
     public float SpawnRate = 7f;
     public int MaxCustomers = 7;
     public float MaxOrderMakeTime = 3f;
     public float MaxOrderGetTime = 6f;
 
     private float timer = 0f;
+
+    private void Awake()
+    {
+        nameContainer.LoadData();
+    }
 
     private void Update()
     {
@@ -36,6 +44,7 @@ public class CustomerSpawner : MonoBehaviour
     {
         var go = Instantiate(customerPrefab, mapGenerator.GetTile(5)[0].Position + new Vector3Int(2, 2, 0), Quaternion.identity, null);
         go.GetComponent<MovementController>().StopAt(mapGenerator.GetTile(5)[0]);
+        go.GetComponent<CustomerOrderController>().Name = nameContainer.GetRandomName();
         PrepareCommands(go);
 
         customers.Add(go);

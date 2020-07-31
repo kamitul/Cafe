@@ -143,6 +143,7 @@ MonoBehaviour:
   customers: []
   mapGenerator: {fileID: 6311331443740520114}
   customerPrefab: {fileID: 6311331442927658171}
+  nameContainer: {fileID: 11400000, guid: fd686d6c23e61e34bab027be4965fa2a, type: 2}
   SpawnRate: 5
   MaxCustomers: 7
   MaxOrderMakeTime: 2
