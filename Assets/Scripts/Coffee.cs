@@ -9,6 +9,16 @@ public class Coffee : ScriptableObject
 {
     public CoffeeType CoffeeType;
     public List<CoffeeParts> IngredientsToMakeCoffee;
+
+    public int GetWholeAmountOfIngredients()
+    {
+        int wholeAmount = 0;
+        foreach (var ingredient in IngredientsToMakeCoffee)
+        {
+            wholeAmount += ingredient.IngredientAmount;
+        }
+        return wholeAmount;
+    }
 }
 
 [Serializable]

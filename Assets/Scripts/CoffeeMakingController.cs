@@ -12,8 +12,7 @@ public class CoffeeMakingController : MonoBehaviour
     [SerializeField] private IngredientSpotsController ingredientSpotsController;
     [SerializeField] private HintsController hintsController;
     private List<IngredientType> mixedIngredients = new List<IngredientType>();
-    public Order Order;
-    private int currentIngredientsOnCanvas = 0;
+    public Order Order { get; set; }
 
     public bool IsMakingOrder { get; set; }
 
@@ -34,18 +33,21 @@ public class CoffeeMakingController : MonoBehaviour
 
     public void AddIngredient(Ingredient ingredient)
     {
-        if (currentIngredientsOnCanvas < mixedIngredients.Count)
+        if (Order != null)
         {
-            mixedIngredients.Add(ingredient.IngredientType);
-            ingredientSpotsController.DisplayIngredientOnSpot(ingredient.IngredientSprite);
-            Debug.Log(string.Format("Ingredient {0} added to mixing device ", ingredient.IngredientType.ToString()));
-            currentIngredientsOnCanvas++;
+            if (mixedIngredients.Count < Order.OrderedCoffee.GetWholeAmountOfIngredients())
+            {
+                mixedIngredients.Add(ingredient.IngredientType);
+                ingredientSpotsController.DisplayIngredientOnSpot(ingredient.IngredientSprite);
+                Debug.Log(string.Format("Ingredient {0} added to mixing device ", ingredient.IngredientType.ToString()));
+            }
         }
+
     }
 
     public void ValidatePreparedCoffee()
     {
-        if (mixedIngredients != null)
+        if (mixedIngredients != null && Order != null)
         {
             List<IngredientType> properIngredients = new List<IngredientType>();
             foreach (var coffeePart in Order.OrderedCoffee.IngredientsToMakeCoffee)
@@ -76,12 +78,16 @@ public class CoffeeMakingController : MonoBehaviour
         }
     }
 
+    public void ClearMixedIngredients()
+    {
+        mixedIngredients.Clear();
+    }
+
     public void ResetCoffeeMakeController()
     {
         mixedIngredients.Clear();
         Order = null;
         IsMakingOrder = false;
-        currentIngredientsOnCanvas = 0;
         ingredientSpotsController.ResetIngredientSpots();
         hintsController.ResetHintsController();
     }
