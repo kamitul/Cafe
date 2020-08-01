@@ -117,6 +117,7 @@ public class BasicCafe : IBuilder
 
     private void CreateBar()
     {
+        var engine = new System.Random();
         Vector3Int barStart = new Vector3Int(width - 5, 1, 0);
 
         for (; barStart.y < 7; barStart.y++)
@@ -126,6 +127,10 @@ public class BasicCafe : IBuilder
                 tiles[i][barStart.y - 1] = new BoxTile(new Vector3Int(i, barStart.y - 1, 0), 13);
             }
             tiles[barStart.x][barStart.y].AddId(9);
+            if (engine.Next(10) < 6)
+            {
+                tiles[barStart.x][barStart.y].AddId(14);
+            }
         }
 
         Vector3Int barEnd = new Vector3Int(barStart.x + 1, barStart.y - 1, 0);
@@ -133,18 +138,24 @@ public class BasicCafe : IBuilder
         for (; barEnd.x < width - 1; barEnd.x++)
         {
             tiles[barEnd.x][barEnd.y].AddId(8);
+            if (engine.Next(10) < 6)
+            {
+                tiles[barEnd.x][barEnd.y].AddId(14);
+            }
         }
     }
 
     private void CreateTables()
     {
-        Vector3Int leftTop = new Vector3Int(1, height - 2, 0);
-        Vector3Int rightDown = new Vector3Int(width - 8, 2, 0);
+        Vector3Int leftTop = new Vector3Int(-1, height - 2, 0);
+        Vector3Int rightDown = new Vector3Int(width - 4, 2, 0);
         Vector3Int rightTop = new Vector3Int(rightDown.x, leftTop.y, 0);
         Vector3Int leftDown = new Vector3Int(leftTop.x, rightDown.y, 0);
 
         Vector3Int center = new Vector3Int(rightDown.x + leftTop.x, leftTop.y + rightDown.y, leftTop.z + rightDown.z) / 2;
 
+        CreateTable((center + new Vector3Int(center.x, leftTop.y, 0)) / 2);
+        CreateTable((center + new Vector3Int(center.x, leftDown.y, 0)) / 2);
         CreateTable((center + leftTop) / 2);
         CreateTable((center + leftDown) / 2);
         CreateTable((center + rightTop) / 2);
