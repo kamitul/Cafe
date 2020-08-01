@@ -117,6 +117,7 @@ public class BasicCafe : IBuilder
 
     private void CreateBar()
     {
+        var engine = new System.Random();
         Vector3Int barStart = new Vector3Int(width - 5, 1, 0);
 
         for (; barStart.y < 7; barStart.y++)
@@ -126,6 +127,10 @@ public class BasicCafe : IBuilder
                 tiles[i][barStart.y - 1] = new BoxTile(new Vector3Int(i, barStart.y - 1, 0), 13);
             }
             tiles[barStart.x][barStart.y].AddId(9);
+            if (engine.Next(10) < 4)
+            {
+                tiles[barStart.x][barStart.y].AddId(14);
+            }
         }
 
         Vector3Int barEnd = new Vector3Int(barStart.x + 1, barStart.y - 1, 0);
@@ -133,6 +138,10 @@ public class BasicCafe : IBuilder
         for (; barEnd.x < width - 1; barEnd.x++)
         {
             tiles[barEnd.x][barEnd.y].AddId(8);
+            if (engine.Next(10) < 4)
+            {
+                tiles[barEnd.x][barEnd.y].AddId(14);
+            }
         }
     }
 
