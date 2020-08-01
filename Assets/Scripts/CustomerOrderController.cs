@@ -16,8 +16,9 @@ public class CustomerOrderController : MonoBehaviour
     private bool isClicked = false;
     public static Action<OrderInfo> OnOrderMade;
     public static Action<OrderInfo> OnOrderRevoked;
-    public Guid CustomerGUID;
     public string Name;
+
+    public OrderInfo OrderInfo { get => orderInfo; }
 
     private void Awake()
     {
@@ -46,8 +47,7 @@ public class CustomerOrderController : MonoBehaviour
 
     public void RandomizeCoffee()
     {
-        CustomerGUID = Guid.NewGuid();
-        orderInfo = new OrderInfo(coffees.GetRandomCoffee(),null, CustomerGUID);
+        orderInfo = new OrderInfo(coffees.GetRandomCoffee(),null, Guid.NewGuid());
     }
 
     public bool IsClicked()
