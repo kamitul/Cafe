@@ -74,7 +74,7 @@ public class OrderCommand : Command
 
     private void CheckForCoffe(Order obj)
     {
-        if(obj.OrderIdentfier == cnt.CustomerGUID)
+        if(obj.OrderIdentfier == cnt.OrderInfo.OrderIdentfier)
         {
             coffeMade = true;
             cnt.RecieveOrder(isCorrect);
