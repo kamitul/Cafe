@@ -23,7 +23,8 @@ public class UIOrdersController : MonoBehaviour
     private void OnDisable()
     {
         CustomerOrderController.OnOrderMade -= AddOrder;
-        CoffeeMakingController.OnOrderDelete += DeleteOrder;
+        CoffeeMakingController.OnOrderDelete -= DeleteOrder;
+        CustomerOrderController.OnOrderRevoked -= DeleteOrder;
     }
 
     public void AddOrder(OrderInfo orderInfo)
@@ -45,6 +46,10 @@ public class UIOrdersController : MonoBehaviour
 
     private void DeleteOrder(OrderInfo orderInfo)
     {
+        if (coffeeMakingController.Order && orderInfo.OrderIdentfier == coffeeMakingController.Order.OrderIdentfier)
+        {
+            coffeeMakingController.ResetCoffeeMakeController();
+        }
         Order orderToDelete = orders.Find(order => order.OrderIdentfier == orderInfo.OrderIdentfier);
         orders.Remove(orderToDelete);
         Destroy(orderToDelete.gameObject);
