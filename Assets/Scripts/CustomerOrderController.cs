@@ -12,10 +12,10 @@ public class CustomerOrderController : MonoBehaviour
     [SerializeField] private GameObject doneIndicator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    private OrderInfo orderInfo = new OrderInfo();
+    private OrderInfo orderInfo;
     private bool isClicked = false;
     public static Action<OrderInfo> OnOrderMade;
-    public static Action OnOrderRevoked;
+    public static Action<OrderInfo> OnOrderRevoked;
     public Guid CustomerGUID;
     public string Name;
 
@@ -41,13 +41,12 @@ public class CustomerOrderController : MonoBehaviour
 
     public void BreakOrder()
     {
-        OnOrderRevoked?.Invoke();
+        OnOrderRevoked?.Invoke(orderInfo);
     }
 
     public void RandomizeCoffee()
     {
-        orderInfo = new OrderInfo();
-        orderInfo.OrderedCoffee = coffees.GetRandomCoffee();
+        orderInfo = new OrderInfo(coffees.GetRandomCoffee(),null, Guid.NewGuid());
     }
 
     public bool IsClicked()
@@ -58,10 +57,10 @@ public class CustomerOrderController : MonoBehaviour
     public void MakeOrder()
     {
         isClicked = true;
-        CustomerGUID = Guid.NewGuid();
+        //CustomerGUID = Guid.NewGuid();
         orderInfo.CustomerName = Name;
-        orderInfo.OrderIdentfier = CustomerGUID;
-        OnOrderMade?.Invoke(orderInfo);
+        //orderInfo.OrderIdentfier = CustomerGUID;
+        OnOrderMade.Invoke(orderInfo);
     }
 
     public void RecieveOrder(bool isCorrect)

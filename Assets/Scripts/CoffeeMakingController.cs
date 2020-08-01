@@ -7,7 +7,7 @@ public class CoffeeMakingController : MonoBehaviour
 {
     public static Action<Order> OnProperCoffePrepared;
     public static Action<Order> OnWrongCoffePrepared;
-    public static Action<Order> OnOrderDelete;
+    public static Action<OrderInfo> OnOrderDelete;
 
     [SerializeField] private IngredientSpotsController ingredientSpotsController;
     [SerializeField] private HintsController hintsController;
@@ -62,7 +62,8 @@ public class CoffeeMakingController : MonoBehaviour
                 Debug.Log("U Fucked up , try again");
             }
             IsMakingOrder = false;
-            OnOrderDelete.Invoke(order);
+            OrderInfo orderToDelete = new OrderInfo(order.OrderedCoffee,order.CustomerName,order.OrderIdentfier);
+            OnOrderDelete.Invoke(orderToDelete);
             ResetCoffeeMakeController();
         }
         else

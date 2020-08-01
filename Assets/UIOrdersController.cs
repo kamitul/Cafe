@@ -17,6 +17,7 @@ public class UIOrdersController : MonoBehaviour
     {
         CustomerOrderController.OnOrderMade += AddOrder;
         CoffeeMakingController.OnOrderDelete += DeleteOrder;
+        CustomerOrderController.OnOrderRevoked += DeleteOrder;
     }
 
     private void OnDisable()
@@ -42,15 +43,15 @@ public class UIOrdersController : MonoBehaviour
         orderButtonComponent.onClick.AddListener(ToggleOrderButtonsOtherThenCurrent);
     }
 
-    private void DeleteOrder(Order orderToDelete)
+    private void DeleteOrder(OrderInfo orderInfo)
     {
+        Order orderToDelete = orders.Find(order => order.OrderIdentfier == orderInfo.OrderIdentfier);
         orders.Remove(orderToDelete);
         Destroy(orderToDelete.gameObject);
         if (orders.Count > 0)
         {
             orders.Last().gameObject.SetActive(orders.Count < MaxOrdersOnUIList);
         }
-
         //ponowna aktywacja buttonów
         ToggleOrderButtonsOtherThenCurrent();
     }
