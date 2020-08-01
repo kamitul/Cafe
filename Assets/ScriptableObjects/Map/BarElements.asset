@@ -15,4 +15,5 @@ MonoBehaviour:
   sprite:
   - {fileID: 21300000, guid: d2018eceb68f87f43aae7baf6ec1079e, type: 3}
   - {fileID: 21300000, guid: 6e2ce625112bee643a33133a8189797f, type: 3}
+  - {fileID: 21300000, guid: f613798d191a54c48a2701b5b8b99a69, type: 3}
   Collideable: 0

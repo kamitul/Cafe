@@ -58,7 +58,7 @@ public class CustomerSpawner : MonoBehaviour
 
         CommandInvoker invoker = go.GetComponent<CommandInvoker>();
         invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), stools, new Vector3(1.28f / 2, 1.28f, 0)));
-        invoker.AddCommand(new DelayCommand(go.GetComponent<MovementController>(), UnityEngine.Random.Range(5,20)));
+        invoker.AddCommand(new DelayCommand(go.GetComponent<MovementController>(), UnityEngine.Random.Range(10,30)));
         invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), bars, new Vector3(-1.28f / 2, 2.28f, 0)));
         invoker.AddCommand(new OrderCommand(go.GetComponent<CustomerOrderController>(), MaxOrderMakeTime, MaxOrderGetTime));
         invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), door, new Vector3(1.28f / 2, 1.28f + 1, 0)));
