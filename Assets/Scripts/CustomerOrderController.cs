@@ -46,7 +46,8 @@ public class CustomerOrderController : MonoBehaviour
 
     public void RandomizeCoffee()
     {
-        orderInfo = new OrderInfo(coffees.GetRandomCoffee(),null, Guid.NewGuid());
+        CustomerGUID = Guid.NewGuid();
+        orderInfo = new OrderInfo(coffees.GetRandomCoffee(),null, CustomerGUID);
     }
 
     public bool IsClicked()
@@ -57,7 +58,6 @@ public class CustomerOrderController : MonoBehaviour
     public void MakeOrder()
     {
         isClicked = true;
-        //CustomerGUID = Guid.NewGuid();
         orderInfo.CustomerName = Name;
         //orderInfo.OrderIdentfier = CustomerGUID;
         OnOrderMade.Invoke(orderInfo);
