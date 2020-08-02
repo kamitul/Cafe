@@ -93,4 +93,9 @@ public class MapMatrix
 
         return boxTiles;
     }
+
+    public BoxTile GetAt(int item2, int item1)
+    {
+        return BoxTiles[item2].RowTiles[item1];
+    }
 }

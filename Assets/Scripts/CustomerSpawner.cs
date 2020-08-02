@@ -18,16 +18,34 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField]
     private NameContainer nameContainer;
 
-    public float SpawnRate = 7f;
+    public float SpawnRate = 5f;
     public int MaxCustomers = 7;
-    public float MaxOrderMakeTime = 3f;
-    public float MaxOrderGetTime = 6f;
+    public float MaxOrderTakeTime = 5f;
+    public float MaxOrderMakeTime = 15f;
 
     private float timer = 0f;
+    private WaitForSeconds secondsDelay;
 
     private void Awake()
     {
+        secondsDelay = new WaitForSeconds(120);
         nameContainer.LoadData();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(IncrementCustomers());
+    }
+
+    private IEnumerator IncrementCustomers()
+    {
+        int index = 0;
+        while(true)
+        {
+            MaxCustomers += 1 * index;
+            yield return secondsDelay;
+            index++;
+        }
     }
 
     private void Update()
@@ -43,7 +61,6 @@ public class CustomerSpawner : MonoBehaviour
     private void SpawnCustomer()
     {
         var go = Instantiate(customerPrefab, mapGenerator.GetTile(5)[0].Position + new Vector3Int(2, 2, 0), Quaternion.identity, null);
-        go.GetComponent<MovementController>().StopAt(mapGenerator.GetTile(5)[0]);
         go.GetComponent<CustomerOrderController>().Name = nameContainer.GetRandomName();
         PrepareCommands(go);
 
@@ -52,7 +69,7 @@ public class CustomerSpawner : MonoBehaviour
 
     private void PrepareCommands(GameObject go)
     {
-        var door = mapGenerator.GetTile(5);
+        var exitDoor = mapGenerator.GetTile(15);
         var stools = mapGenerator.GetTile(10);
         var bars = mapGenerator.GetTile(8).Concat(mapGenerator.GetTile(9)).ToList();
 
@@ -60,8 +77,8 @@ public class CustomerSpawner : MonoBehaviour
         invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), stools, new Vector3(1.28f / 2, 1.28f, 0)));
         invoker.AddCommand(new DelayCommand(go.GetComponent<MovementController>(), UnityEngine.Random.Range(10,30)));
         invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), bars, new Vector3(-1.28f / 2, 2.28f, 0)));
-        invoker.AddCommand(new OrderCommand(go.GetComponent<CustomerOrderController>(), MaxOrderMakeTime, MaxOrderGetTime));
-        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), door, new Vector3(1.28f / 2, 1.28f + 1, 0)));
+        invoker.AddCommand(new OrderCommand(go.GetComponent<CustomerOrderController>(), MaxOrderTakeTime, MaxOrderMakeTime));
+        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), exitDoor, new Vector3(1.28f / 2, 1.28f + 1, 0)));
         invoker.AddCommand(new DestroyCommand(go.GetComponent<CustomerDestroyer>(), customers, 1));
         invoker.isLooping = false;
     }

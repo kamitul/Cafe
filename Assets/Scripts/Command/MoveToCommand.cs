@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -38,13 +39,25 @@ public class MoveToCommand : Command
     {
         List<BoxTile> destAvTiles = new List<BoxTile>();
         BoxTile destTile;
-        while (destAvTiles.Count < 1)
+        while (true)
         {
+            await Task.Delay(Random.Range(10, 50));
             destAvTiles = destTiles.FindAll(x => x.Status != TileStatus.OCCUPIED);
-            await Task.Delay(100);
+            if(destAvTiles.Count > 0)
+            {
+                destTile = destAvTiles[Random.Range(0, destAvTiles.Count - 1)];
+                if (destTile.Status == TileStatus.AVAILABLE)
+                {
+                    if(!destTile.Id.Contains(15)) //temp fix
+                        destTile.Status = TileStatus.OCCUPIED;
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
         }
-        destTile = destAvTiles[Random.Range(0, destAvTiles.Count - 1)];
-        destTile.Status = TileStatus.OCCUPIED;
         return destTile;
     }
 }

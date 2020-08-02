@@ -53,11 +53,11 @@ public class BasicCafe : IBuilder
         }
     }
 
-    private int CreateDoor(System.Random engine)
+    private void CreateDoor(System.Random engine)
     {
         int rand = engine.Next(2, width - 7);
         tiles[rand][0] = new BoxTile(new Vector3Int(rand, 0, 0), 5);
-        return rand;
+        tiles[rand + 2][0] = new BoxTile(new Vector3Int(rand + 2, 0, 0), 15);
     }
 
     private void CreateWindows()

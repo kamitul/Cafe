@@ -16,7 +16,7 @@ public class DelayCommand : Command
 
     public override async Task Execute()
     {
-        movementController.Sit();
+        movementController.Stop();
         await Task.Delay(delay * 1000);      
     }
 }

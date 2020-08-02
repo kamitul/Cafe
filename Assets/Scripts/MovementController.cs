@@ -46,6 +46,13 @@ public class MovementController : MonoBehaviour, ITickable
         this.destination = destination;
     }
 
+    private void OnDestroy()
+    {
+        isMoving = false;
+        if (currentTile != null)
+            currentTile.Status = TileStatus.AVAILABLE;
+    }
+
     public void StopAt(BoxTile boxTile)
     {
         isMoving = false;
@@ -54,7 +61,8 @@ public class MovementController : MonoBehaviour, ITickable
         this.destination = transform.position;
     }
 
-    public void Sit()
+    public void Stop()
     {
+        gifController.Play("Stop");
     }
 }
