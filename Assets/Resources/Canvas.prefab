@@ -873,7 +873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.7890231}
   m_AnchorMax: {x: 1, y: 0.90000004}
-  m_AnchoredPosition: {x: 0, y: 4.1000366}
+  m_AnchoredPosition: {x: 0, y: 4.0996094}
   m_SizeDelta: {x: 0, y: -8.200066}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7670235281679970794
@@ -1029,7 +1029,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.020136217}
   m_AnchorMax: {x: 1, y: 0.7890231}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3522764954688263274
@@ -2449,7 +2449,6 @@ RectTransform:
   - {fileID: 7571366395912541766}
   - {fileID: 3221347481327527824}
   - {fileID: 5541577262217614609}
-  - {fileID: 6870945608924311030}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2496,7 +2495,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2532,7 +2531,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientSpotsController: {fileID: 900336422035282125}
   hintsController: {fileID: 6825131600302851647}
-  Order: {fileID: 0}
 --- !u!1 &2778144977593212829
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,7 +2596,7 @@ MonoBehaviour:
   m_ChildAlignment: 3
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 175, y: 80}
+  m_CellSize: {x: 200, y: 80}
   m_Spacing: {x: 0, y: 4.28}
   m_Constraint: 1
   m_ConstraintCount: 1
@@ -3481,10 +3479,10 @@ RectTransform:
   m_Father: {fileID: 2778144977403092881}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.026720218, y: 0.7641821}
-  m_AnchorMax: {x: 0.15095025, y: 0.9659509}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 204.52, y: 404.45}
+  m_SizeDelta: {x: 409.04, y: -808.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3320512873789522241
 MonoBehaviour:
@@ -4178,16 +4176,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3908887110241808223}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2778144977403092881}
+  m_Father: {fileID: 5541577262217614609}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -123, y: 60}
+  m_AnchoredPosition: {x: -100, y: 25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7910016898122802821
@@ -5435,10 +5433,10 @@ RectTransform:
   m_Father: {fileID: 2778144977403092881}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.01494708, y: 0.030896166}
-  m_AnchorMax: {x: 0.29897007, y: 0.7570071}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 356.62, y: -130.24997}
+  m_SizeDelta: {x: 713.24, y: -260.50006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6551692653529975611
 GameObject:
@@ -6071,13 +6069,14 @@ RectTransform:
   - {fileID: 9012681008250021463}
   - {fileID: 6135786483965334180}
   - {fileID: 2751070379119354407}
+  - {fileID: 6870945608924311030}
   m_Father: {fileID: 2778144977403092881}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.16361684, y: 0.7641821}
-  m_AnchorMax: {x: 0.2828235, y: 0.9659509}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 556.6, y: 404.15}
+  m_SizeDelta: {x: 305.9, y: -808.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6825131600302851647
 MonoBehaviour:
@@ -6541,7 +6540,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 26
+  m_firstOverflowCharacterIndex: 34
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0

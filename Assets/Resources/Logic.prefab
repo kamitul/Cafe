@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 0}
   Width: 20
-  Height: 15
+  Height: 17
   MapMatrix:
     BoxTiles: []
   go:
