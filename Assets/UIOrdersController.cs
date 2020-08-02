@@ -17,12 +17,14 @@ public class UIOrdersController : MonoBehaviour
     {
         CustomerOrderController.OnOrderMade += AddOrder;
         CoffeeMakingController.OnOrderDelete += DeleteOrder;
+        CustomerOrderController.OnOrderRevoked += DeleteOrder;
     }
 
     private void OnDisable()
     {
         CustomerOrderController.OnOrderMade -= AddOrder;
-        CoffeeMakingController.OnOrderDelete += DeleteOrder;
+        CoffeeMakingController.OnOrderDelete -= DeleteOrder;
+        CustomerOrderController.OnOrderRevoked -= DeleteOrder;
     }
 
     public void AddOrder(OrderInfo orderInfo)
@@ -42,15 +44,19 @@ public class UIOrdersController : MonoBehaviour
         orderButtonComponent.onClick.AddListener(ToggleOrderButtonsOtherThenCurrent);
     }
 
-    private void DeleteOrder(Order orderToDelete)
+    private void DeleteOrder(OrderInfo orderInfo)
     {
+        if (coffeeMakingController.Order && orderInfo.OrderIdentfier == coffeeMakingController.Order.OrderIdentfier)
+        {
+            coffeeMakingController.ResetCoffeeMakeController();
+        }
+        Order orderToDelete = orders.Find(order => order.OrderIdentfier == orderInfo.OrderIdentfier);
         orders.Remove(orderToDelete);
         Destroy(orderToDelete.gameObject);
         if (orders.Count > 0)
         {
             orders.Last().gameObject.SetActive(orders.Count < MaxOrdersOnUIList);
         }
-
         //ponowna aktywacja buttonów
         ToggleOrderButtonsOtherThenCurrent();
     }

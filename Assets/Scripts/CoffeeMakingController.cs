@@ -7,43 +7,50 @@ public class CoffeeMakingController : MonoBehaviour
 {
     public static Action<Order> OnProperCoffePrepared;
     public static Action<Order> OnWrongCoffePrepared;
-    public static Action<Order> OnOrderDelete;
+    public static Action<OrderInfo> OnOrderDelete;
 
     [SerializeField] private IngredientSpotsController ingredientSpotsController;
     [SerializeField] private HintsController hintsController;
     private List<IngredientType> mixedIngredients = new List<IngredientType>();
-    private Order order;
+    public Order Order { get; set; }
 
     public bool IsMakingOrder { get; set; }
 
     public void Initialize(Order _order)
     {
-        order = _order;
+        Order = _order;
         int wholeAmountOfIngredients = 0;
         IsMakingOrder = true;
 
-        foreach (var coffeePart in order.OrderedCoffee.IngredientsToMakeCoffee)
+        foreach (var coffeePart in Order.OrderedCoffee.IngredientsToMakeCoffee)
         {
             wholeAmountOfIngredients += coffeePart.IngredientAmount;
         }
         ingredientSpotsController.InitializeIngredientSpots(wholeAmountOfIngredients);
-        hintsController.InitializeHintsController(order);
-        ingredientSpotsController.InitializeIngredientSpotsText(Order.GetCoffeeName(order.OrderedCoffee.CoffeeType.ToString()));
+        hintsController.InitializeHintsController(Order);
+        ingredientSpotsController.InitializeIngredientSpotsText(Order.GetCoffeeName(Order.OrderedCoffee.CoffeeType.ToString()));
     }
 
     public void AddIngredient(Ingredient ingredient)
     {
-        mixedIngredients.Add(ingredient.IngredientType);
-        ingredientSpotsController.DisplayIngredientOnSpot(ingredient.IngredientSprite);
-        Debug.Log(string.Format("Ingredient {0} added to mixing device ", ingredient.IngredientType.ToString()));
+        if (Order != null)
+        {
+            if (mixedIngredients.Count < Order.OrderedCoffee.GetWholeAmountOfIngredients())
+            {
+                mixedIngredients.Add(ingredient.IngredientType);
+                ingredientSpotsController.DisplayIngredientOnSpot(ingredient.IngredientSprite);
+                Debug.Log(string.Format("Ingredient {0} added to mixing device ", ingredient.IngredientType.ToString()));
+            }
+        }
+
     }
 
     public void ValidatePreparedCoffee()
     {
-        if (mixedIngredients != null)
+        if (mixedIngredients != null && Order != null)
         {
             List<IngredientType> properIngredients = new List<IngredientType>();
-            foreach (var coffeePart in order.OrderedCoffee.IngredientsToMakeCoffee)
+            foreach (var coffeePart in Order.OrderedCoffee.IngredientsToMakeCoffee)
             {
                 for (int i = 0; i < coffeePart.IngredientAmount; i++)
                 {
@@ -53,17 +60,17 @@ public class CoffeeMakingController : MonoBehaviour
 
             if (ListEqualier.UnorderedEqual(properIngredients, mixedIngredients))
             {
-                OnProperCoffePrepared?.Invoke(order);
+                OnProperCoffePrepared?.Invoke(Order);
                 Debug.Log("U prepared proper coffee");
             }
             else
             {
-                OnWrongCoffePrepared?.Invoke(order);
+                OnWrongCoffePrepared?.Invoke(Order);
                 Debug.Log("U Fucked up , try again");
             }
             IsMakingOrder = false;
-            OnOrderDelete.Invoke(order);
-            ResetCoffeeMakeController();
+            OrderInfo orderToDelete = new OrderInfo(Order.OrderedCoffee,Order.CustomerName,Order.OrderIdentfier);
+            OnOrderDelete.Invoke(orderToDelete);
         }
         else
         {
@@ -71,10 +78,16 @@ public class CoffeeMakingController : MonoBehaviour
         }
     }
 
+    public void ClearMixedIngredients()
+    {
+        mixedIngredients.Clear();
+    }
+
     public void ResetCoffeeMakeController()
     {
         mixedIngredients.Clear();
-        order = null;
+        Order = null;
+        IsMakingOrder = false;
         ingredientSpotsController.ResetIngredientSpots();
         hintsController.ResetHintsController();
     }
