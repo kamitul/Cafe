@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class DestroyCommand : Command
 {
-    private CustomerDestroyer customerDestroyer;
     private List<GameObject> customers;
     private int delay;
 
-    public DestroyCommand(CustomerDestroyer customerDestroyer, List<GameObject> customers, int delay)
+    public DestroyCommand(Controller[] controllers, List<GameObject> customers, int delay) : base(controllers)
     {
-        this.customerDestroyer = customerDestroyer;
         this.delay = delay;
         this.customers = customers;
     }
 
     public override async Task Execute()
     {
+        CustomerDestroyerController customerDestroyer = controllers.Find(x => x.GetType() == typeof(CustomerDestroyerController)) as CustomerDestroyerController;
         await Task.Delay(delay * 1000);
         customers.Remove(customerDestroyer.gameObject);
         customerDestroyer.Destroy();

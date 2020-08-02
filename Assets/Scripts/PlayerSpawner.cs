@@ -18,7 +18,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        var tile = mapGenerator.GetTile(13)[UnityEngine.Random.Range(0, mapGenerator.GetTile(13).Count)];
+        var tile = mapGenerator.GetTile(13)[Random.Range(0, mapGenerator.GetTile(13).Count)];
         var go = Instantiate(playerPrefab, (Vector3)tile.Position * 1.28f, Quaternion.identity, null);
         go.GetComponent<MovementController>().StopAt(tile);
         PrepareCommands(go);
@@ -29,10 +29,10 @@ public class PlayerSpawner : MonoBehaviour
         var tiles = mapGenerator.GetTile(13);
 
         CommandInvoker invoker = go.GetComponent<CommandInvoker>();
-        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), tiles, new Vector3(1.28f / 2, 1.28f, 0)));
-        invoker.AddCommand(new DelayCommand(go.GetComponent<MovementController>(), UnityEngine.Random.Range(3, 10)));
-        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), tiles, new Vector3(1.28f / 2, 1.28f, 0)));
-        invoker.AddCommand(new DelayCommand(go.GetComponent<MovementController>(), UnityEngine.Random.Range(3, 10)));
+        invoker.AddCommand(new MoveToCommand(new Controller[] { go.GetComponent<MovementController>() }, tiles, new Vector3(1.28f / 2, 1.28f, 0)));
+        invoker.AddCommand(new DelayCommand(new Controller[] { go.GetComponent<MovementController>() }, Random.Range(3, 10)));
+        invoker.AddCommand(new MoveToCommand(new Controller[] { go.GetComponent<MovementController>() }, tiles, new Vector3(1.28f / 2, 1.28f, 0)));
+        invoker.AddCommand(new DelayCommand(new Controller[] { go.GetComponent<MovementController>() }, Random.Range(3, 10)));
         invoker.isLooping = true;
     }
 }

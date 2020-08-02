@@ -8,13 +8,11 @@ using UnityEngine.UIElements;
 
 public class MoveToCommand : Command
 {
-    private MovementController movementController;
     private List<BoxTile> destTiles;
     private Vector3 offset;
 
-    public MoveToCommand(MovementController moveController, List<BoxTile> destTiles, Vector3 offset)
+    public MoveToCommand(Controller[] controllers, List<BoxTile> destTiles, Vector3 offset) : base(controllers)
     {
-        this.movementController = moveController;
         this.destTiles = destTiles;
         this.offset = offset;
     }
@@ -22,8 +20,8 @@ public class MoveToCommand : Command
     public override async Task Execute()
     {
         BoxTile destTile = await FindDestTile();
+        MovementController movementController = controllers.Find(x => x.GetType() == typeof(MovementController)) as MovementController;
         movementController.MoveToPoint((Vector3)destTile.Position * 1.28f + offset);
-
         while (movementController.GetDistance() > Mathf.Epsilon)
         {
             if (token.IsCancellationRequested)
@@ -31,7 +29,6 @@ public class MoveToCommand : Command
 
             await Task.Delay(50);
         }
-
         movementController.StopAt(destTile);
     }
 

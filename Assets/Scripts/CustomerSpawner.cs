@@ -74,12 +74,12 @@ public class CustomerSpawner : MonoBehaviour
         var bars = mapGenerator.GetTile(8).Concat(mapGenerator.GetTile(9)).ToList();
 
         CommandInvoker invoker = go.GetComponent<CommandInvoker>();
-        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), stools, new Vector3(1.28f / 2, 1.28f, 0)));
-        invoker.AddCommand(new DelayCommand(go.GetComponent<MovementController>(), UnityEngine.Random.Range(10,30)));
-        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), bars, new Vector3(-1.28f / 2, 2.28f, 0)));
-        invoker.AddCommand(new OrderCommand(go.GetComponent<CustomerOrderController>(), MaxOrderTakeTime, MaxOrderMakeTime));
-        invoker.AddCommand(new MoveToCommand(go.GetComponent<MovementController>(), exitDoor, new Vector3(1.28f / 2, 1.28f + 1, 0)));
-        invoker.AddCommand(new DestroyCommand(go.GetComponent<CustomerDestroyer>(), customers, 1));
+        invoker.AddCommand(new MoveToCommand(new Controller[] { go.GetComponent<MovementController>() }, stools, new Vector3(1.28f / 2, 1.28f, 0)));
+        invoker.AddCommand(new DelayCommand(new Controller[] { go.GetComponent<MovementController>() }, UnityEngine.Random.Range(10,30)));
+        invoker.AddCommand(new MoveToCommand(new Controller[] { go.GetComponent<MovementController>() }, bars, new Vector3(-1.28f / 2, 2.28f, 0)));
+        invoker.AddCommand(new OrderCommand(new Controller[] { go.GetComponent<CustomerOrderController>() }, MaxOrderTakeTime, MaxOrderMakeTime));
+        invoker.AddCommand(new MoveToCommand(new Controller[] { go.GetComponent<MovementController>() }, exitDoor, new Vector3(1.28f / 2, 1.28f + 1, 0)));
+        invoker.AddCommand(new DestroyCommand(new Controller[] { go.GetComponent<CustomerDestroyerController>() }, customers, 1));
         invoker.isLooping = false;
     }
 }

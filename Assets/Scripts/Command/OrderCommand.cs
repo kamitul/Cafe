@@ -6,18 +6,16 @@ using UnityEngine;
 
 public class OrderCommand : Command
 {
-    private CustomerOrderController cnt;
     private float takeOrderLimitTime;
     private float getOrderLimitTime;
     private float counter;
     private float tick;
 
     private bool coffeMade = false;
-    private bool isCorrect;
+    private bool isCorrect = false;
 
-    public OrderCommand(CustomerOrderController cnt, float takeOrderLimitTime, float getOrderLimitTime)
+    public OrderCommand(Controller[] controllers, float takeOrderLimitTime, float getOrderLimitTime) : base(controllers)
     {
-        this.cnt = cnt;
         this.takeOrderLimitTime = takeOrderLimitTime;
         this.getOrderLimitTime = getOrderLimitTime;
         this.tick = 0f;
@@ -25,18 +23,18 @@ public class OrderCommand : Command
 
     public override async Task Execute()
     {
-        await TakeOrder();
+        CustomerOrderController cnt = controllers.Find(x => x.GetType() == typeof(CustomerOrderController)) as CustomerOrderController;
+        await TakeOrder(cnt);
         if (!cnt.IsClicked())
         {
             cnt.RecieveOrder(false);
             return;
         }
 
-        CoffeeMakingController.OnProperCoffePrepared += (Order order) => { isCorrect = true; CheckForCoffe(order); };
-        CoffeeMakingController.OnWrongCoffePrepared += (Order order) => { isCorrect = false; CheckForCoffe(order); };
+        CoffeeMakingController.OnProperCoffePrepared += (Order order) => { isCorrect = true; CheckForCoffe(order, cnt); };
+        CoffeeMakingController.OnWrongCoffePrepared += (Order order) => { isCorrect = false; CheckForCoffe(order, cnt); };
 
-        await GetOrder();
-
+        await GetOrder(cnt);
         if (!coffeMade)
         {
             cnt.RecieveOrder(false);
@@ -48,7 +46,7 @@ public class OrderCommand : Command
         cnt.ToggleDoneOrder(false);
     }
 
-    private async Task GetOrder()
+    private async Task GetOrder(CustomerOrderController cnt)
     {
         counter = 0f;
         cnt.ToggleWaitForOrder(true);
@@ -68,7 +66,7 @@ public class OrderCommand : Command
         cnt.ToggleWaitForOrder(false);
     }
 
-    private async Task TakeOrder()
+    private async Task TakeOrder(CustomerOrderController cnt)
     {
         counter = 0f;
         cnt.RandomizeCoffee();
@@ -90,7 +88,7 @@ public class OrderCommand : Command
         cnt.ToggleSetOrder(false);
     }
 
-    private void CheckForCoffe(Order obj)
+    private void CheckForCoffe(Order obj, CustomerOrderController cnt)
     {
         if (obj.OrderIdentfier == cnt.OrderInfo.OrderIdentfier)
         {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CustomerOrderController : MonoBehaviour
+public class CustomerOrderController : Controller
 {
     [SerializeField] private Coffees coffees;
     [SerializeField] private GameObject orderIndicator;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class MovementController : MonoBehaviour, ITickable
+public class MovementController : Controller, ITickable
 {
     [Range(1f,4f)]
     public float Speed = 2f;

@@ -5,17 +5,16 @@ using UnityEngine;
 
 public class DelayCommand : Command
 {
-    private MovementController movementController;
     private int delay;
 
-    public DelayCommand(MovementController moveController, int delay)
+    public DelayCommand(Controller[] controllers, int delay) : base(controllers)
     {
-        this.movementController = moveController;
         this.delay = delay;
     }
 
     public override async Task Execute()
     {
+        MovementController movementController = controllers.Find(x => x.GetType() == typeof(MovementController)) as MovementController;
         movementController.Stop();
         await Task.Delay(delay * 1000);      
     }

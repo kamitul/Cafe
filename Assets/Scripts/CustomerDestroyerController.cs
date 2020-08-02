@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomerDestroyer : MonoBehaviour
+public class CustomerDestroyerController : Controller
 {
     public void Destroy()
     {
