@@ -1,10 +1,8 @@
-﻿using System.Collections;
+﻿using Controllers;
+using Map;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 public class MoveToCommand : Command
 {
