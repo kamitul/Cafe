@@ -9,10 +9,6 @@ namespace Map
     {
         public List<MapRow> BoxTiles;
 
-        public MapMatrix()
-        {
-        }
-
         public void SetTiles(BoxTile[][] tiles)
         {
             BoxTiles = new List<MapRow>();

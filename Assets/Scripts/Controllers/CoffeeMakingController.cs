@@ -15,7 +15,8 @@ namespace Controllers
 
         [SerializeField] private IngredientSpotsController ingredientSpotsController;
         [SerializeField] private HintsController hintsController;
-        private List<IngredientType> mixedIngredients = new List<IngredientType>();
+
+        private readonly List<IngredientType> mixedIngredients = new List<IngredientType>();
         public Order Order { get; set; }
 
         public bool IsMakingOrder { get; set; }
@@ -65,13 +66,12 @@ namespace Controllers
                 if (ListEqualier.UnorderedEqual(properIngredients, mixedIngredients))
                 {
                     OnProperCoffePrepared?.Invoke(Order);
-                    Debug.Log("U prepared proper coffee");
                 }
                 else
                 {
                     OnWrongCoffePrepared?.Invoke(Order);
-                    Debug.Log("U Fucked up , try again");
                 }
+
                 IsMakingOrder = false;
                 OrderInfo orderToDelete = new OrderInfo(Order.OrderedCoffee, Order.CustomerName, Order.OrderIdentfier);
                 OnOrderDelete.Invoke(orderToDelete);

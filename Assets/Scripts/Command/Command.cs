@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-public class Command
+namespace Commands
 {
-    protected CancellationTokenSource token = new CancellationTokenSource();
-    protected List<Controller> controllers;
-
-    public virtual async Task Execute() { }
-
-    public Command(dynamic[] controllers) 
+    public abstract class Command
     {
-        this.controllers = new List<Controller>();
-        for(int i = 0; i < controllers.Length; ++i)
+        protected CancellationTokenSource token = new CancellationTokenSource();
+        protected List<Controller> controllers;
+
+        public abstract Task Execute();
+
+        public Command(dynamic[] controllers)
         {
-            this.controllers.Add(controllers[i] as Controller);
+            this.controllers = new List<Controller>();
+            for (int i = 0; i < controllers.Length; ++i)
+            {
+                this.controllers.Add(controllers[i] as Controller);
+            }
+        }
+
+        public void Destroy()
+        {
+            token.Cancel();
         }
     }
-
-    public void Destroy()
-    {
-        token.Cancel();
-    }
 }
-

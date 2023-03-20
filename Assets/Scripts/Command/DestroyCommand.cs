@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class DestroyCommand : Command
+namespace Commands
 {
-    private List<GameObject> customers;
-    private int delay;
-
-    public DestroyCommand(Controller[] controllers, List<GameObject> customers, int delay) : base(controllers)
+    public class DestroyCommand : Command
     {
-        this.delay = delay;
-        this.customers = customers;
-    }
+        private readonly List<GameObject> customers;
+        private readonly int delay;
 
-    public override async Task Execute()
-    {
-        CustomerDestroyerController customerDestroyer = controllers.Find(x => x.GetType() == typeof(CustomerDestroyerController)) as CustomerDestroyerController;
-        await Task.Delay(delay * 1000);
-        customers.Remove(customerDestroyer.gameObject);
-        customerDestroyer.Destroy();
+        public DestroyCommand(Controller[] controllers, List<GameObject> customers, int delay) : base(controllers)
+        {
+            this.delay = delay;
+            this.customers = customers;
+        }
+
+        public override async Task Execute()
+        {
+            CustomerDestroyerController customerDestroyer = controllers.Find(x => x.GetType() == typeof(CustomerDestroyerController)) as CustomerDestroyerController;
+            await Task.Delay(delay * 1000);
+            customers.Remove(customerDestroyer.gameObject);
+            customerDestroyer.Destroy();
+        }
     }
 }

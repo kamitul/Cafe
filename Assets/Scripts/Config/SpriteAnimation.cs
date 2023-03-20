@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Config
 {
-    [CreateAssetMenu(menuName = "Sprite Animation")]
+    [CreateAssetMenu(fileName = "Sprite Animation", menuName = "Config/Sprite Animation", order = 2)]
     public class SpriteAnimation : ScriptableObject
     {
         public string Name;

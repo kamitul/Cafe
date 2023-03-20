@@ -27,7 +27,7 @@ namespace Map
             switch (cafeType)
             {
                 case CafeType.BASIC:
-                    builder = new BasicCafe(tilemap, Width, Height);
+                    builder = new BasicCafe(Width, Height);
                     builder.BuildBackground();
                     builder.BuildMisc();
                     MapMatrix = builder.GetProduct();

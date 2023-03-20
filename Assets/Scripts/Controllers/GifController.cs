@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Controllers
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    public class GifController : MonoBehaviour, ITickable
+    public class GifController : MonoBehaviour
     {
         public List<SpriteAnimation> Animations;
         public int TickTime = 100;
@@ -37,11 +37,6 @@ namespace Controllers
         {
             cancelToken.Cancel();
             cancelToken.Dispose();
-        }
-
-        public void Tick()
-        {
-
         }
 
         private async void Initialize()

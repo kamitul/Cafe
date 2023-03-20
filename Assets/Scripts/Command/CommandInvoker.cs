@@ -3,68 +3,72 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class CommandInvoker : MonoBehaviour
+namespace Commands
 {
-    private Queue<Command> commandBuffer;
-    public bool isLooping = false;
-
-    private void Awake()
+    public class CommandInvoker : MonoBehaviour
     {
-        commandBuffer = new Queue<Command>();
-    }
+        private Queue<Command> commandBuffer;
+        public bool isLooping = false;
 
-    private void Start()
-    {
-        Run();
-    }
-
-    public void AddCommand(Command command)
-    {
-        commandBuffer.Enqueue(command);
-    }
-
-    public async void Run()
-    {
-        if (!isLooping)
+        private void Awake()
         {
-            while (commandBuffer.Count > 0)
-            {
-                Command c = commandBuffer.Dequeue();
-                try
-                {
-                    await c.Execute();
-                    c.Destroy();
-                }
-                catch (TaskCanceledException)
-                {
-                }
-            }
+            commandBuffer = new Queue<Command>();
         }
-        else
+
+        private void Start()
         {
-            while(true)
+            Run();
+        }
+
+        public void AddCommand(Command command)
+        {
+            commandBuffer.Enqueue(command);
+        }
+
+        public async void Run()
+        {
+            if (!isLooping)
             {
-                for(int i = 0; i < commandBuffer.Count; ++i)
+                while (commandBuffer.Count > 0)
                 {
-                    Command c = commandBuffer.ElementAt(i);
+                    Command c = commandBuffer.Dequeue();
                     try
                     {
                         await c.Execute();
+                        c.Destroy();
                     }
-                    catch (TaskCanceledException)
+                    catch (TaskCanceledException e)
                     {
+                        Debug.LogError(e.Message);
+                    }
+                }
+            }
+            else
+            {
+                while (true)
+                {
+                    for (int i = 0; i < commandBuffer.Count; ++i)
+                    {
+                        Command c = commandBuffer.ElementAt(i);
+                        try
+                        {
+                            await c.Execute();
+                        }
+                        catch (TaskCanceledException e)
+                        {
+                            Debug.LogError(e.Message);
+                        }
                     }
                 }
             }
         }
-    }
 
-    private void OnDestroy()
-    {
-        for(int i = 0; i< commandBuffer.Count; ++i)
+        private void OnDestroy()
         {
-            commandBuffer.Dequeue().Destroy();
+            for (int i = 0; i < commandBuffer.Count; ++i)
+            {
+                commandBuffer.Dequeue().Destroy();
+            }
         }
     }
 }
-

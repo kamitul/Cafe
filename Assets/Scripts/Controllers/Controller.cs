@@ -2,8 +2,5 @@
 
 namespace Controllers
 {
-    public class Controller : MonoBehaviour
-    {
-
-    }
+    public abstract class Controller : MonoBehaviour { }
 }

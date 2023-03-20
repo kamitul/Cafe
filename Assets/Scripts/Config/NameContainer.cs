@@ -2,7 +2,7 @@
 
 namespace Config
 {
-    [CreateAssetMenu(menuName = "Names")]
+    [CreateAssetMenu(fileName = "Names", menuName = "Config/Names", order = 2)]
     public class NameContainer : ScriptableObject
     {
         public NameArray Names;

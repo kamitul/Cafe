@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Config
 {
-    [CreateAssetMenu(fileName = "Coffee", menuName = "ScriptableObjects/Coffee", order = 2)]
+    [CreateAssetMenu(fileName = "Coffee", menuName = "Config/Coffee", order = 2)]
 
     public class Coffee : ScriptableObject
     {

@@ -4,7 +4,7 @@ namespace UI
 {
     public class TickableContainter
     {
-        private List<ITickable> tickables;
+        private readonly List<ITickable> tickables;
 
         public TickableContainter(List<ITickable> list)
         {

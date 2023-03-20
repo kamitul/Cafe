@@ -6,8 +6,7 @@ namespace UI
 {
     public class OrderIndicatorGUI : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField]
-        private CustomerOrderController customerOrder;
+        [SerializeField] private CustomerOrderController customerOrder;
 
         public void OnMouseDown()
         {

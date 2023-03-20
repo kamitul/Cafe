@@ -6,8 +6,8 @@ namespace UI
 {
     public class Hint : MonoBehaviour
     {
-        public TextMeshProUGUI amountOfIngredientsText;
-        public Image hintIngredientImage;
+        [SerializeField] private TextMeshProUGUI amountOfIngredientsText;
+        [SerializeField] private Image hintIngredientImage;
 
         public void InitializeHint(string amountOfIngredients, Sprite hintIngredientSprite)
         {

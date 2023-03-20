@@ -1,4 +1,5 @@
-﻿using Config;
+﻿using Commands;
+using Config;
 using Controllers;
 using Map;
 using System.Collections;
@@ -10,17 +11,9 @@ namespace Spawner
 {
     public class CustomerSpawner : MonoBehaviour
     {
-        [SerializeField]
-        private List<GameObject> customers;
-
-        [SerializeField]
-        private MapGenerator mapGenerator;
-
-        [SerializeField]
-        private GameObject customerPrefab;
-
-        [SerializeField]
-        private NameContainer nameContainer;
+        [SerializeField] private MapGenerator mapGenerator;
+        [SerializeField] private GameObject customerPrefab;
+        [SerializeField] private NameContainer nameContainer;
 
         public float SpawnRate = 5f;
         public int MaxCustomers = 7;
@@ -29,6 +22,8 @@ namespace Spawner
 
         private float timer = 0f;
         private WaitForSeconds secondsDelay;
+
+        private readonly List<GameObject> customers = new List<GameObject>();
 
         private void Awake()
         {

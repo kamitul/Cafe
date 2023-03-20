@@ -4,96 +4,99 @@ using System.Threading.Tasks;
 using UI;
 using UnityEngine;
 
-public class OrderCommand : Command
+namespace Commands
 {
-    private float takeOrderLimitTime;
-    private float getOrderLimitTime;
-    private float counter;
-    private float tick;
-
-    private bool coffeMade = false;
-    private bool isCorrect = false;
-
-    public OrderCommand(Controller[] controllers, float takeOrderLimitTime, float getOrderLimitTime) : base(controllers)
+    public class OrderCommand : Command
     {
-        this.takeOrderLimitTime = takeOrderLimitTime;
-        this.getOrderLimitTime = getOrderLimitTime;
-        this.tick = 0f;
-    }
+        private readonly float takeOrderLimitTime;
+        private readonly float getOrderLimitTime;
+        private float counter;
+        private float tick;
 
-    public override async Task Execute()
-    {
-        CustomerOrderController cnt = controllers.Find(x => x.GetType() == typeof(CustomerOrderController)) as CustomerOrderController;
-        await TakeOrder(cnt);
-        if (!cnt.IsClicked())
+        private bool coffeMade = false;
+        private bool isCorrect = false;
+
+        public OrderCommand(Controller[] controllers, float takeOrderLimitTime, float getOrderLimitTime) : base(controllers)
         {
-            cnt.RecieveOrder(false);
-            return;
+            this.takeOrderLimitTime = takeOrderLimitTime;
+            this.getOrderLimitTime = getOrderLimitTime;
+            tick = 0f;
         }
 
-        CoffeeMakingController.OnProperCoffePrepared += (Order order) => { isCorrect = true; CheckForCoffe(order, cnt); };
-        CoffeeMakingController.OnWrongCoffePrepared += (Order order) => { isCorrect = false; CheckForCoffe(order, cnt); };
-
-        await GetOrder(cnt);
-        if (!coffeMade)
+        public override async Task Execute()
         {
-            cnt.RecieveOrder(false);
-            return;
-        }
+            CustomerOrderController cnt = controllers.Find(x => x.GetType() == typeof(CustomerOrderController)) as CustomerOrderController;
+            await TakeOrder(cnt);
+            if (!cnt.IsClicked())
+            {
+                cnt.RecieveOrder(false);
+                return;
+            }
 
-        cnt.ToggleDoneOrder(true);
-        await Task.Delay(100);
-        cnt.ToggleDoneOrder(false);
-    }
+            CoffeeMakingController.OnProperCoffePrepared += (order) => { isCorrect = true; CheckForCoffe(order, cnt); };
+            CoffeeMakingController.OnWrongCoffePrepared += (order) => { isCorrect = false; CheckForCoffe(order, cnt); };
 
-    private async Task GetOrder(CustomerOrderController cnt)
-    {
-        counter = 0f;
-        cnt.ToggleWaitForOrder(true);
-        coffeMade = false;
-        tick = Time.deltaTime;
+            await GetOrder(cnt);
+            if (!coffeMade)
+            {
+                cnt.RecieveOrder(false);
+                return;
+            }
 
-        while (!coffeMade)
-        {
-            counter += Math.Abs(tick);
-            tick = Time.time;
-            if (counter > getOrderLimitTime)
-            { cnt.BreakOrder(); break; }
+            cnt.ToggleDoneOrder(true);
             await Task.Delay(100);
-            tick -= Time.time;
+            cnt.ToggleDoneOrder(false);
         }
 
-        cnt.ToggleWaitForOrder(false);
-    }
-
-    private async Task TakeOrder(CustomerOrderController cnt)
-    {
-        counter = 0f;
-        cnt.RandomizeCoffee();
-        cnt.ToggleSetOrder(true);
-        tick = Time.deltaTime;
-
-        while (!cnt.IsClicked())
+        private async Task GetOrder(CustomerOrderController cnt)
         {
-            if (token.IsCancellationRequested)
-                throw new TaskCanceledException();
+            counter = 0f;
+            cnt.ToggleWaitForOrder(true);
+            coffeMade = false;
+            tick = Time.deltaTime;
 
-            counter += Math.Abs(tick);
-            tick = Time.time;
-            if (counter > takeOrderLimitTime)
-            { break; }
-            await Task.Delay(100);
-            tick -= Time.time;
+            while (!coffeMade)
+            {
+                counter += Math.Abs(tick);
+                tick = Time.time;
+                if (counter > getOrderLimitTime)
+                { cnt.BreakOrder(); break; }
+                await Task.Delay(100);
+                tick -= Time.time;
+            }
+
+            cnt.ToggleWaitForOrder(false);
         }
-        cnt.ToggleSetOrder(false);
-    }
 
-    private void CheckForCoffe(Order obj, CustomerOrderController cnt)
-    {
-        if (obj.OrderIdentfier == cnt.OrderInfo.OrderIdentfier)
+        private async Task TakeOrder(CustomerOrderController cnt)
         {
-            coffeMade = true;
-            cnt.RecieveOrder(isCorrect);
+            counter = 0f;
+            cnt.RandomizeCoffee();
+            cnt.ToggleSetOrder(true);
+            tick = Time.deltaTime;
+
+            while (!cnt.IsClicked())
+            {
+                if (token.IsCancellationRequested)
+                    throw new TaskCanceledException();
+
+                counter += Math.Abs(tick);
+                tick = Time.time;
+                if (counter > takeOrderLimitTime)
+                { break; }
+                await Task.Delay(100);
+                tick -= Time.time;
+            }
+            cnt.ToggleSetOrder(false);
+        }
+
+        private void CheckForCoffe(Order obj, CustomerOrderController cnt)
+        {
+            if (obj.OrderIdentfier == cnt.OrderInfo.OrderIdentfier)
+            {
+                coffeMade = true;
+                cnt.RecieveOrder(isCorrect);
+            }
         }
     }
 }

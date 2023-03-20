@@ -11,7 +11,8 @@ namespace Controllers
         [SerializeField] private GameObject orderElementPrefab;
         [SerializeField] private Transform orderSpawnTransform;
         [SerializeField] private CoffeeMakingController coffeeMakingController;
-        private List<Order> orders = new List<Order>();
+
+        private readonly List<Order> orders = new List<Order>();
         private const int MaxOrdersOnUIList = 4;
 
         private void OnEnable()

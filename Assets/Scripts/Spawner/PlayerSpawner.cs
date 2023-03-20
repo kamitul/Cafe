@@ -1,4 +1,5 @@
-﻿using Controllers;
+﻿using Commands;
+using Controllers;
 using Map;
 using UnityEngine;
 
@@ -6,12 +7,8 @@ namespace Spawner
 {
     public class PlayerSpawner : MonoBehaviour
     {
-        [SerializeField]
-        private MapGenerator mapGenerator;
-
-        [SerializeField]
-        private GameObject playerPrefab;
-
+        [SerializeField] private MapGenerator mapGenerator;
+        [SerializeField] private GameObject playerPrefab;
 
         private void Start()
         {

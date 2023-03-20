@@ -9,16 +9,17 @@ namespace UI
 {
     public class Order : MonoBehaviour
     {
+        private const string BUTTON_TEXT_PART = " for ";
+
         [SerializeField] private TextMeshProUGUI buttonText;
 
-        private const string ButtonTextPart = " for ";
         public Coffee OrderedCoffee { get; set; }
         public string CustomerName { get; set; }
         public Guid OrderIdentfier { get; set; }
 
         public void SetButtonText()
         {
-            buttonText.text = GetCoffeeName(OrderedCoffee.CoffeeType.ToString()) + ButtonTextPart + CustomerName;
+            buttonText.text = GetCoffeeName(OrderedCoffee.CoffeeType.ToString()) + BUTTON_TEXT_PART + CustomerName;
         }
 
         public static string GetCoffeeName(string coffeeTypeString)

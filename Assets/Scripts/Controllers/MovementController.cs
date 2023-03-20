@@ -6,10 +6,9 @@ namespace Controllers
 {
     public class MovementController : Controller, ITickable
     {
-        [Range(1f, 4f)]
-        public float Speed = 2f;
-        private GifController gifController;
+        [Range(1f, 4f)] public float Speed = 2f;
 
+        private GifController gifController;
         private Vector3 destination;
         private bool isMoving = false;
         private BoxTile currentTile = null;

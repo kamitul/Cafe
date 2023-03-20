@@ -5,15 +5,15 @@ namespace UI
 {
     public class OrderInfo
     {
-        public Coffee OrderedCoffee;
-        public string CustomerName;
-        public Guid OrderIdentfier;
+        public Coffee OrderedCoffee { get; private set; }
+        public string CustomerName { get; set; }
+        public Guid OrderIdentfier { get; private set; }
 
-        public OrderInfo(Coffee _orderedCoffee, string _customerName, Guid _orderIdentifier)
+        public OrderInfo(Coffee cofee, string name, Guid identifier)
         {
-            OrderedCoffee = _orderedCoffee;
-            CustomerName = _customerName;
-            OrderIdentfier = _orderIdentifier;
+            OrderedCoffee = cofee;
+            CustomerName = name;
+            OrderIdentfier = identifier;
         }
     }
 }

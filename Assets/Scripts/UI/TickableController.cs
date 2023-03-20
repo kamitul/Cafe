@@ -5,8 +5,7 @@ namespace UI
 {
     public class TickableController : MonoBehaviour
     {
-        [SerializeField]
-        private TickableContainter tickables;
+        [SerializeField] private TickableContainter tickables;
 
         private void Awake()
         {

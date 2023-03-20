@@ -17,9 +17,8 @@ namespace Controllers
         [SerializeField] private GameObject hintButtonUI;
         [SerializeField] private GameObject hintContentUI;
 
-
-        List<Hint> hints = new List<Hint>();
-        Coffee orderedCoffe;
+        private readonly List<Hint> hints = new List<Hint>();
+        private Coffee orderedCoffe;
 
         private void Awake()
         {

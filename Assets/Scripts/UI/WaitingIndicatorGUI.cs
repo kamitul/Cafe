@@ -5,8 +5,7 @@ namespace UI
 {
     public class WaitingIndicatorGUI : MonoBehaviour
     {
-        [SerializeField]
-        private GifController gifController;
+        [SerializeField] private GifController gifController;
 
         private void Start()
         {

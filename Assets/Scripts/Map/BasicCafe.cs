@@ -6,15 +6,13 @@ namespace Map
 {
     public class BasicCafe : IBuilder
     {
-        private Tilemap tilemap;
-        private int width;
-        private int height;
-        private MapMatrix mapMatrix;
+        private readonly int width;
+        private readonly int height;
+        private readonly MapMatrix mapMatrix;
         private BoxTile[][] tiles;
 
-        public BasicCafe(Tilemap tilemap, int width, int height)
+        public BasicCafe(int width, int height)
         {
-            this.tilemap = tilemap;
             this.width = width;
             this.height = height;
             mapMatrix = new MapMatrix();

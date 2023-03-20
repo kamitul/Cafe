@@ -6,10 +6,11 @@ namespace Controllers
 {
     public class PointsController : MonoBehaviour
     {
+        private const string POINTS_PREFIX = "Points: ";
+
         [SerializeField] private TextMeshProUGUI pointsText;
 
         private int points = 0;
-        private string pointsPrefix = "Points: ";
 
         private void OnEnable()
         {
@@ -40,7 +41,7 @@ namespace Controllers
 
         private void AssignPointsToText()
         {
-            pointsText.text = pointsPrefix + points.ToString();
+            pointsText.text = POINTS_PREFIX + points.ToString();
         }
     }
 }
