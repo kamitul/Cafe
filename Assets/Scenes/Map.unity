@@ -1145,11 +1145,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 2778144977403092895, guid: 622b1c5e47afd694d818b601edd9b383,
-        type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2778144977775611871, guid: 622b1c5e47afd694d818b601edd9b383,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1665,5 +1660,10 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1166133049}
+    - target: {fileID: 6311331443990370435, guid: 945bd85cc0cc99a4bbb38276b1fdc6b4,
+        type: 3}
+      propertyPath: MaxCustomers
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945bd85cc0cc99a4bbb38276b1fdc6b4, type: 3}

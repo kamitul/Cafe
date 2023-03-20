@@ -22,13 +22,15 @@ namespace Commands
             BoxTile destTile = await FindDestTile();
             MovementController movementController = controllers.Find(x => x.GetType() == typeof(MovementController)) as MovementController;
             movementController.MoveToPoint((Vector3)destTile.Position * 1.28f + offset);
-            while (movementController.GetDistance() > Mathf.Epsilon)
+            while (!token.IsCancellationRequested && 
+                movementController.GetDistance() > Mathf.Epsilon)
             {
-                if (token.IsCancellationRequested)
-                    throw new TaskCanceledException();
-
                 await Task.Delay(50);
             }
+
+            if (token.IsCancellationRequested)
+                throw new TaskCanceledException();
+
             movementController.StopAt(destTile);
         }
 
